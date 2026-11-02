@@ -1,0 +1,6 @@
+pipeline/kokoro
+pipeline/fonts/
+pipeline/music
+pipeline/build/
+pipeline/in.mp4
+__pycache__/

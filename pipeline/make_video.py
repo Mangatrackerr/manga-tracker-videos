@@ -88,25 +88,34 @@ def make(name,title,scenes,end_show,voice,music,outdir):
         for (a,b,x) in srt:
             if a>=endt: continue
             n+=1; R.write(f"{n}\n{ts(a,1)} --> {ts(b,1)}\n{x}\n\n")
-    # video
-    fc=[];labels=[];prev=None
+    # video: cada escena se corta en un clip aparte (con -ss) para no cargar toda la grabación en memoria
+    segs=[];prev=None
     for i,(a,b,need,start,ld) in enumerate(plan):
         if a is None:
-            a,b=prev[1]-0.05,prev[1]
-            fc.append(f"[0:v]trim={b-1.2}:{b},setpts=PTS-STARTPTS,fps=30,reverse,trim=end_frame=1,setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration={need+0.2},trim=0:{need},setpts=PTS-STARTPTS,boxblur=8:1,eq=brightness=-0.32:saturation=0.7[p{i}]")
+            b=prev[1]; ss=max(0,b-1.2)
+            f=f"trim={b-1.2-ss if b-1.2>0 else 0}:{b-ss},setpts=PTS-STARTPTS,fps=30,reverse,trim=end_frame=1,setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration={need+0.2},trim=0:{need},setpts=PTS-STARTPTS,boxblur=8:1,eq=brightness=-0.32:saturation=0.7"
+            segs.append((ss,b-ss+0.1,f))
         else:
-            L=b-a; f=L/need
-            if f>=1:
-                sp=min(f,2.2); fc.append(f"[0:v]trim={a}:{a+need*sp},setpts=(PTS-STARTPTS)/{sp},fps=30,trim=0:{need},setpts=PTS-STARTPTS[p{i}]")
-                prev=(a,a+need*sp)
+            L=b-a; fr=L/need
+            if fr>=1:
+                sp=min(fr,2.2); dur=need*sp
+                f=f"trim=0:{dur},setpts=(PTS-STARTPTS)/{sp},fps=30,trim=0:{need},setpts=PTS-STARTPTS"
+                segs.append((a,dur+0.2,f)); prev=(a,a+dur)
             else:
-                sl=min(1/f,1.35); fc.append(f"[0:v]trim={a}:{b},setpts={sl}*(PTS-STARTPTS),fps=30,tpad=stop_mode=clone:stop_duration={need},trim=0:{need},setpts=PTS-STARTPTS[p{i}]")
-                prev=(a,b)
-        labels.append(f"[p{i}]")
-    n=len(labels)
-    fc.append("".join(labels)+f"concat=n={n}:v=1:a=0,split[a][b]")
+                sl=min(1/fr,1.35)
+                f=f"trim=0:{L},setpts={sl}*(PTS-STARTPTS),fps=30,tpad=stop_mode=clone:stop_duration={need},trim=0:{need},setpts=PTS-STARTPTS"
+                segs.append((a,L+0.2,f)); prev=(a,b)
+    lst=open(f"{d}/segs.txt","w")
+    for i,(ss,du,f) in enumerate(segs):
+        sfn=f"{d}/seg{i}.mp4"
+        subprocess.run(["ffmpeg","-v","error","-y","-ss",f"{ss:.3f}","-t",f"{du:.3f}","-i",SRC,"-an","-vf",f+",format=yuv420p","-r","30","-c:v","libx264","-preset","veryfast","-crf","14",sfn],check=True)
+        lst.write(f"file '{sfn}'\n")
+    lst.close()
+    subprocess.run(["ffmpeg","-v","error","-y","-f","concat","-safe","0","-i",f"{d}/segs.txt","-c","copy",f"{d}/all.mp4"],check=True)
+    n=0
+    fc=["[0:v]setpts=PTS-STARTPTS,split[a][b]"]
     fc.append("[a]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=28:2,eq=brightness=-0.28:saturation=1.3[bg]")
-    fc.append("[b]crop=iw:ih-34:0:34,scale=-2:1920:flags=lanczos,eq=contrast=1.04:saturation=1.08,unsharp=5:5:0.6[fg]")
+    fc.append("[b]crop=iw:ih*0.96:0:ih*0.04,scale=-2:1920:flags=lanczos,eq=contrast=1.04:saturation=1.08,unsharp=5:5:0.6[fg]")
     fc.append(f"[bg][fg]overlay=(W-w)/2:0[base]")
     fc.append(f"[{n+1}:v]scale=420:420,format=rgba[lg]")
     fc.append(f"[base][lg]overlay=x=(W-w)/2:y=480:enable='gte(t,{endt+0.05})',subtitles={d}/s.ass:fontsdir={FONTS}[v]")
@@ -121,13 +130,13 @@ def make(name,title,scenes,end_show,voice,music,outdir):
     fc2.append("[mu][sc]sidechaincompress=threshold=0.02:ratio=5:attack=15:release=350:makeup=1[mud]")
     fc2.append("[vo]volume=1.0[vo2];[vo2][mud]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=9[au]")
     # inputs: 0 src, then n+1 logo index must be n+1 -> we place n dummy? fix ordering below
-    cmd=["ffmpeg","-v","error","-y","-i",SRC]
+    cmd=["ffmpeg","-v","error","-y","-i",f"{d}/all.mp4"]
     # pad inputs so logo is index n+1: add n copies? simpler: re-index
     fc_all=";".join(fc+fc2)
     fc_all=fc_all.replace(f"[{n+1}:v]","[1:v]")
     for i in range(len(items)): fc_all=fc_all.replace(f"[{n+2+i}:a]",f"[{2+i}:a]")
     fc_all=fc_all.replace(f"[{n+2+len(items)}:a]",f"[{2+len(items)}:a]")
     cmd+=["-loop","1","-i",LOGO]+ins+["-stream_loop","-1","-i",music,"-filter_complex",fc_all,"-map","[v]","-map","[au]","-t",f"{total:.2f}",
-         "-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p","-r","30","-c:a","aac","-b:a","192k","-movflags","+faststart",f"{outdir}/{name}.mp4"]
+         "-c:v","libx264","-preset","medium","-crf","23","-pix_fmt","yuv420p","-r","30","-c:a","aac","-b:a","192k","-movflags","+faststart",f"{outdir}/{name}.mp4"]
     subprocess.run(cmd,check=True)
     return total
