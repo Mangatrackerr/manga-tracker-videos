@@ -4,7 +4,8 @@
  "horarios": [
   "10:00",
   "14:30",
-  "19:00"
+  "19:00",
+  "22:00"
  ],
  "videos": [
   {
@@ -405,7 +406,9 @@
    "titulo": "Shonen NO significa anime de acción 🤯",
    "texto": "Shonen, shojo, seinen y josei no son géneros: son el público al que va dirigido 🤯 ¿Eres más de shonen o de seinen? 👇 Filtra por demografía en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #shonen #seinen #manga #otaku #parati",
    "estilo": "gancho",
-   "programado": []
+   "programado": [
+    "2026-11-07T22:00"
+   ]
   },
   {
    "id": "2026-11-07g_quiz_cuantos_animes_chica",
@@ -416,7 +419,9 @@
    "titulo": "¿Cuántos animes has visto en tu vida? Responde rápido ⏱️",
    "texto": "Responde rápido: ¿cuántos animes has visto en tu vida? A, B, C o D 👇 Si no lo sabes, Manga Tracker te lo cuenta. Gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
    "estilo": "gancho",
-   "programado": []
+   "programado": [
+    "2026-11-08T22:00"
+   ]
   },
   {
    "id": "2026-11-07g_un_episodio_al_dia_chico",
@@ -803,5 +808,8 @@
    "estilo": "gancho",
    "programado": []
   }
+ ],
+ "horario_sin_instagram": [
+  "22:00"
  ]
 }

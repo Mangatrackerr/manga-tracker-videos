@@ -1,8 +1,8 @@
 # Automatización diaria — vídeos de Manga Tracker
 
 Instrucciones para la tarea programada (se ejecuta cada día a las 08:00 hora de Madrid).
-Objetivo: **publicidad de la app Manga Tracker**. Publicar 3 vídeos al día en TikTok, Instagram (Reels) y YouTube (Shorts)
-a las **10:00, 14:30 y 19:00** (Europe/Madrid), sin revisión manual de Xavi. Xavi confía en la edición: no le preguntes nada, decide tú.
+Objetivo: **publicidad de la app Manga Tracker**. Publicar 4 vídeos al día (Europe/Madrid), sin revisión manual de Xavi:
+**10:00, 14:30 y 19:00** en TikTok + Instagram (Reels) + YouTube (Shorts), y **22:00** solo en TikTok + YouTube (Shorts) — sin Instagram (decidido el 7/11/2026). Xavi confía en la edición: no le preguntes nada, decide tú.
 
 ## 0. Preparación
 1. Clona el repo `Mangatrackerr/manga-tracker-videos` (si no está ya) y trabaja en él.
@@ -33,11 +33,11 @@ Mira `grabaciones/` (ignora `.gitkeep`). Si hay vídeos:
 10. Commit y push (mensaje en español).
 
 ## 2. Programar publicaciones (siempre, haya o no grabaciones nuevas)
-Mantén programados en Metricool los huecos de **hoy y mañana** (10:00, 14:30, 19:00 Europe/Madrid), saltando los que ya hayan pasado.
+Mantén programados en Metricool los huecos de **hoy y mañana** (10:00, 14:30, 19:00 y 22:00 Europe/Madrid), saltando los que ya hayan pasado.
 1. Consulta `getScheduledPosts` (blogId `7829643`, zona `Europe/Madrid`) para hoy y mañana. No dupliques huecos ya ocupados.
 2. Para cada hueco libre, elige vídeo con `python3 pipeline/estado.py elegir <n>`.
    Orden: nuevos "gancho" → resubida de "gancho" (los más antiguos) → clásicos (solo de reserva).
-3. Programa con `createScheduledPost` (blogId `7829643`), un post por hueco con las 3 redes:
+3. Programa con `createScheduledPost` (blogId `7829643`), un post por hueco con las 3 redes (en el hueco de las **22:00** quita Instagram: `providers` solo tiktok + youtube y sin `instagramData`):
    - `media`: [url del vídeo en raw.githubusercontent.com]
    - `providers`: tiktok, instagram, youtube
    - `text`: el `texto` del vídeo
