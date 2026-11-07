@@ -64,3 +64,20 @@ Temas que funcionaron: Todo en una app · ¿Qué veo hoy? (filtros) · ¿Por qu�
 Funciones reales de la app (no inventar otras): buscar anime/manga/manhwa/manhua/novelas, filtros por género y demografía, Mi Lista con estados (viendo, completado, en pausa, abandonado, planificado) y episodio exacto, listas personalizadas públicas/privadas, ficha con sinopsis/valoración/géneros, recomendaciones para ti, nuevos capítulos, amigos, estadísticas, medallas/logros, 6 idiomas.
 
 Enlace Play Store: https://play.google.com/store/apps/details?id=com.mangatracker.app
+
+
+## Estilo gancho (aprobado por Xavi el 7/11/2026 — PREFERIDO)
+Vídeos tipo "anuncio indirecto": empiezan con algo interesante y la app aparece como solución. Motor: `pipeline/gancho/engine.py`.
+Lote de ejemplo (20 temas): `pipeline/gancho/lote_2026-11-07g.py`. Necesita el mismo entorno (kokoro, fuentes, música n1..n8).
+- Estructura: **gancho** (dato cierto / pregunta / test, 0–3 s) → **escalada** → **giro** (problema con el que te identificas) → **demo** de la app en un móvil
+  (con círculo amarillo + etiqueta sobre el dato, `callout=(x, y, texto, tiempo)` en fracciones del fotograma ORIGINAL de la grabación) → **cierre** con pregunta para comentar + logo + "Gratis en Play Store".
+- Fondo morado animado con partículas (rojo para los giros), tipografía Luckiest Guy con sombra, efectos de sonido (boom, whoosh, pop, ticks), música 0.30 con sidechain, karaoke abajo.
+- Primitivas: `S_counter` (número con anillo), `S_grid` (rejilla que se llena), `S_cards` (tarjetas que caen), `S_text` (texto grande, con cambio a rojo + burbujas),
+  `S_strike` (tachar y corregir), `S_options` (test A/B/C/D), `S_chat` (burbujas de chat), `S_versus` (A vs B), `S_quad` (2x2), `S_countdown` (3-2-1),
+  `S_phone(a, b, mode="fit"|"play", rate, callout, slide)` (la grabación entre a y b s dentro del móvil; `mode="play", rate=0` = imagen fija), `S_end`.
+- Cada escena: `([índices de líneas de voz], primitiva, cola_extra)`. Tiempos: float = segundos desde el inicio de la escena; `(k, dt)` = inicio de la línea k + dt; `(k, dt, f)` = + f·duración de la línea k.
+- Líneas: `(texto en pantalla, texto para la voz)` — en la voz los números van en letra. Pronunciación extra en `engine.py` (`M.SUBS`).
+- Sin imágenes de anime ni logos de terceros. Solo datos ciertos o cuentas sencillas (p. ej. 365 × 24 min ≈ 146 h).
+- Clips útiles de `procesadas/grabacion_2026-11-02.mp4` (s): estrenos 1.2–5.5 · ficha+añadir 13.5–17.5 · inicio 19.5–24 · filtros 26.6–28.8 (demografía y=0.854, isekai 0.32/0.589) ·
+  comedia 32–38 · buscar con pestañas 47.5 (Novelas 0.87/0.165) · episodios 62–66 · manga/manhwa 72–80 · Mi Lista 90.1–92.6 (Ep. 7 0.09/0.594) · ficha 12 ep. 97.3 ·
+  añadir a top tier 98–99.8 · mis listas 105–108.2 · amigo 121.3–124.5 · perfil fijo 127.75 (167 0.22/0.487, 120 0.13/0.60, 38 0.5/0.60) · estados fijo 129.5 (completado 0.80/0.388, en pausa 0.80/0.452, abandonado 0.80/0.515) · medallas fijo 131.0 (10/12 0.875/0.182).

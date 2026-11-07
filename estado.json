@@ -366,7 +366,9 @@
    "titulo": "¿Cuántos animes tienes a medias? 😳",
    "texto": "Apuesto a que no sabes cuántos animes tienes a medias 👀 Yo tenía 11 abandonados y 28 en pausa. Cuéntalos con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
    "estilo": "gancho",
-   "programado": []
+   "programado": [
+    "2026-11-08T10:00"
+   ]
   },
   {
    "id": "2026-11-07g_regla_3_episodios_chico",
@@ -377,7 +379,9 @@
    "titulo": "La regla de los 3 episodios en el anime 🤔",
    "texto": "¿Conoces la regla de los 3 episodios? Si en el tercero no te engancha, fuera 🚪 ¿Tú le das 3 o solo 1? 👇 Marca cada episodio con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #animerecomendaciones #parati",
    "estilo": "gancho",
-   "programado": []
+   "programado": [
+    "2026-11-08T14:30"
+   ]
   },
   {
    "id": "2026-11-07g_manga_manhwa_manhua_chica",
@@ -388,7 +392,9 @@
    "titulo": "Manga, manhwa y manhua NO son lo mismo 📚",
    "texto": "Manga 🇯🇵, manhwa 🇰🇷 y manhua 🇨🇳 no son lo mismo. ¿Cuál lees tú más? 👇 Llévalos todos en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#manga #manhwa #manhua #webtoon #otaku #parati",
    "estilo": "gancho",
-   "programado": []
+   "programado": [
+    "2026-11-08T19:00"
+   ]
   },
   {
    "id": "2026-11-07g_shonen_no_es_accion_chico",
@@ -464,6 +470,336 @@
    "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_dos_tipos_chico.mp4",
    "titulo": "Hay 2 tipos de personas que ven anime… ¿A o B? 👀",
    "texto": "Hay dos tipos de personas que ven anime… ¿Tú eres A o B? 👇 Guarda el episodio exacto por el que vas con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_elegir_que_ver_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_elegir_que_ver",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_elegir_que_ver_chica.mp4",
+   "titulo": "Pasas más tiempo eligiendo anime que viéndolo 😩",
+   "texto": "15 minutos al día eligiendo qué ver = más de 90 horas al año 😩 ¿Cuánto tardas tú? 👇 Filtra por género con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #animerecomendaciones #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_red_flags_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_red_flags",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_red_flags_chico.mp4",
+   "titulo": "Red flags de un otaku 🚩",
+   "texto": "Red flags de un otaku 🚩 ¿Cuál es la tuya? 👇 Tiene arreglo: Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #redflags #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_isekai_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_isekai",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_isekai_chica.mp4",
+   "titulo": "Si un anime empieza con un camión… 🚚",
+   "texto": "Si un anime empieza con un camión, ya sabes lo que viene 🚚✨ ¿Cuál es tu isekai favorito? 👇 Fíltralos todos con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #isekai #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_top3_3_segundos_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_top3_3_segundos",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_top3_3_segundos_chico.mp4",
+   "titulo": "Tu top 3 de anime en 3 segundos ⏱️",
+   "texto": "Tienes 3 segundos: dime tu top 3 de anime ⏱️ Escríbelo en comentarios 👇 Guarda tu top tier en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #toptier #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_que_dice_tu_lista_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_que_dice_tu_lista",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_que_dice_tu_lista_chica.mp4",
+   "titulo": "Lo que tu lista de anime dice de ti 👀",
+   "texto": "Tu lista de anime dice mucho de ti 👀 ¿Y la tuya qué dice? 👇 Míralo en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_novelas_ligeras_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_novelas_ligeras",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_novelas_ligeras_chico.mp4",
+   "titulo": "Muchos animes empiezan siendo una novela ligera 📖",
+   "texto": "Sword Art Online, Re:Zero, Konosuba… empezaron siendo novelas ligeras 📖 ¿Lees novelas? 👇 Llévalas junto a tu anime en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #novelasligeras #lightnovel #otaku #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_antes_ahora_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_antes_ahora",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_antes_ahora_chica.mp4",
+   "titulo": "Cómo llevaba mis animes antes vs ahora 📲",
+   "texto": "Antes: notas del móvil y capturas. Ahora: todo en una app 📲 ¿Tú cómo lo llevas? 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #manga #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_amigos_quien_mas_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_amigos_quien_mas",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_amigos_quien_mas_chico.mp4",
+   "titulo": "¿Quién ha visto más anime, tú o tu amigo? 👀",
+   "texto": "Mi amigo decía que había visto más anime que yo… 72 vs 167 😎 Etiqueta a ese amigo 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #amigos #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_diez_mil_horas_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_diez_mil_horas",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_diez_mil_horas_chica.mp4",
+   "titulo": "10.000 horas para ser experto en anime = 25.000 episodios 🤯",
+   "texto": "Dicen que con 10.000 horas eres experto… en anime eso son unos 25.000 episodios 🤯 ¿Cuánto te falta? 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #datoscuriosos #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_temporada_en_una_tarde_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_temporada_en_una_tarde",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_temporada_en_una_tarde_chico.mp4",
+   "titulo": "Una temporada de anime se ve en una tarde ⏳",
+   "texto": "12 episodios = unas 5 horas: una temporada en una tarde ⏳ ¿Cuál te viste del tirón? 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #animerecomendaciones #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_a_medias_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_a_medias",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_a_medias_chico.mp4",
+   "titulo": "¿Cuántos animes tienes a medias? 😳",
+   "texto": "Apuesto a que no sabes cuántos animes tienes a medias 👀 Yo tenía 11 abandonados y 28 en pausa. Cuéntalos con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_regla_3_episodios_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_regla_3_episodios",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_regla_3_episodios_chica.mp4",
+   "titulo": "La regla de los 3 episodios en el anime 🤔",
+   "texto": "¿Conoces la regla de los 3 episodios? Si en el tercero no te engancha, fuera 🚪 ¿Tú le das 3 o solo 1? 👇 Marca cada episodio con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #animerecomendaciones #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_manga_manhwa_manhua_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_manga_manhwa_manhua",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_manga_manhwa_manhua_chico.mp4",
+   "titulo": "Manga, manhwa y manhua NO son lo mismo 📚",
+   "texto": "Manga 🇯🇵, manhwa 🇰🇷 y manhua 🇨🇳 no son lo mismo. ¿Cuál lees tú más? 👇 Llévalos todos en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#manga #manhwa #manhua #webtoon #otaku #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_shonen_no_es_accion_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_shonen_no_es_accion",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_shonen_no_es_accion_chica.mp4",
+   "titulo": "Shonen NO significa anime de acción 🤯",
+   "texto": "Shonen, shojo, seinen y josei no son géneros: son el público al que va dirigido 🤯 ¿Eres más de shonen o de seinen? 👇 Filtra por demografía en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #shonen #seinen #manga #otaku #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_quiz_cuantos_animes_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_quiz_cuantos_animes",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_quiz_cuantos_animes_chico.mp4",
+   "titulo": "¿Cuántos animes has visto en tu vida? Responde rápido ⏱️",
+   "texto": "Responde rápido: ¿cuántos animes has visto en tu vida? A, B, C o D 👇 Si no lo sabes, Manga Tracker te lo cuenta. Gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_un_episodio_al_dia_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_un_episodio_al_dia",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_un_episodio_al_dia_chica.mp4",
+   "titulo": "1 episodio al día = 146 horas al año 😳",
+   "texto": "Un episodio al día son 365 episodios al año… unas 146 horas 😳 ¿Sabrías decir qué viste? Apúntalo todo con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #datoscuriosos #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_que_me_recomiendas_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_que_me_recomiendas",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_que_me_recomiendas_chico.mp4",
+   "titulo": "Cuando te piden que recomiendes un anime… 💀",
+   "texto": "Cuando te preguntan qué anime recomiendas y tu cerebro se queda en blanco 💀 ¿Qué anime recomendarías tú? 👇 Guarda tus listas en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #animerecomendaciones #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_temporadas_estrenos_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_temporadas_estrenos",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_temporadas_estrenos_chica.mp4",
+   "titulo": "Siempre te enteras tarde de los estrenos de anime 😩",
+   "texto": "4 temporadas de anime al año y siempre te enteras tarde del bueno 😩 ¿Qué estreno estás esperando? 👇 Mira los próximos estrenos en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #estrenosanime #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_logros_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_logros",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_logros_chico.mp4",
+   "titulo": "Ver anime ya da logros. Literal 🏆",
+   "texto": "Ver anime ya da logros. Literal 🏆 Otaku iniciado, veterano, leyenda… ¿Cuántas medallas sacarías tú? 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #logros #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_dos_tipos_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_dos_tipos",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_dos_tipos_chica.mp4",
+   "titulo": "Hay 2 tipos de personas que ven anime… ¿A o B? 👀",
+   "texto": "Hay dos tipos de personas que ven anime… ¿Tú eres A o B? 👇 Guarda el episodio exacto por el que vas con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_elegir_que_ver_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_elegir_que_ver",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_elegir_que_ver_chico.mp4",
+   "titulo": "Pasas más tiempo eligiendo anime que viéndolo 😩",
+   "texto": "15 minutos al día eligiendo qué ver = más de 90 horas al año 😩 ¿Cuánto tardas tú? 👇 Filtra por género con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #animerecomendaciones #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_red_flags_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_red_flags",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_red_flags_chica.mp4",
+   "titulo": "Red flags de un otaku 🚩",
+   "texto": "Red flags de un otaku 🚩 ¿Cuál es la tuya? 👇 Tiene arreglo: Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #redflags #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_isekai_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_isekai",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_isekai_chico.mp4",
+   "titulo": "Si un anime empieza con un camión… 🚚",
+   "texto": "Si un anime empieza con un camión, ya sabes lo que viene 🚚✨ ¿Cuál es tu isekai favorito? 👇 Fíltralos todos con Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #isekai #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_top3_3_segundos_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_top3_3_segundos",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_top3_3_segundos_chica.mp4",
+   "titulo": "Tu top 3 de anime en 3 segundos ⏱️",
+   "texto": "Tienes 3 segundos: dime tu top 3 de anime ⏱️ Escríbelo en comentarios 👇 Guarda tu top tier en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #toptier #otaku #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_que_dice_tu_lista_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_que_dice_tu_lista",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_que_dice_tu_lista_chico.mp4",
+   "titulo": "Lo que tu lista de anime dice de ti 👀",
+   "texto": "Tu lista de anime dice mucho de ti 👀 ¿Y la tuya qué dice? 👇 Míralo en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #weeb #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_novelas_ligeras_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_novelas_ligeras",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_novelas_ligeras_chica.mp4",
+   "titulo": "Muchos animes empiezan siendo una novela ligera 📖",
+   "texto": "Sword Art Online, Re:Zero, Konosuba… empezaron siendo novelas ligeras 📖 ¿Lees novelas? 👇 Llévalas junto a tu anime en Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #novelasligeras #lightnovel #otaku #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_antes_ahora_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_antes_ahora",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_antes_ahora_chico.mp4",
+   "titulo": "Cómo llevaba mis animes antes vs ahora 📲",
+   "texto": "Antes: notas del móvil y capturas. Ahora: todo en una app 📲 ¿Tú cómo lo llevas? 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #animeespañol #manga #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_amigos_quien_mas_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_amigos_quien_mas",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_amigos_quien_mas_chica.mp4",
+   "titulo": "¿Quién ha visto más anime, tú o tu amigo? 👀",
+   "texto": "Mi amigo decía que había visto más anime que yo… 72 vs 167 😎 Etiqueta a ese amigo 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #amigos #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_diez_mil_horas_chico",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_diez_mil_horas",
+   "voz": "chico",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_diez_mil_horas_chico.mp4",
+   "titulo": "10.000 horas para ser experto en anime = 25.000 episodios 🤯",
+   "texto": "Dicen que con 10.000 horas eres experto… en anime eso son unos 25.000 episodios 🤯 ¿Cuánto te falta? 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #otaku #datoscuriosos #animeespañol #parati",
+   "estilo": "gancho",
+   "programado": []
+  },
+  {
+   "id": "2026-11-07g_temporada_en_una_tarde_chica",
+   "lote": "2026-11-07g",
+   "tema": "2026-11-07g_temporada_en_una_tarde",
+   "voz": "chica",
+   "url": "https://raw.githubusercontent.com/Mangatrackerr/manga-tracker-videos/main/videos/2026-11-07g_temporada_en_una_tarde_chica.mp4",
+   "titulo": "Una temporada de anime se ve en una tarde ⏳",
+   "texto": "12 episodios = unas 5 horas: una temporada en una tarde ⏳ ¿Cuál te viste del tirón? 👇 Manga Tracker, gratis en Play Store, link en mi perfil 👆\n#anime #animerecomendaciones #otaku #animeespañol #parati",
    "estilo": "gancho",
    "programado": []
   }
