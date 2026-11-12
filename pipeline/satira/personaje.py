@@ -66,8 +66,13 @@ def draw(expr="neutral", blink=False, look=(0, 0), glasses=False, sash=None, swe
                     _poly(d, [(x - 14, ey + 8), (x + 14, ey + 8), (x + 20, ey + 210), (x - 20, ey + 210)], s, fill=(120, 190, 255))
                     continue
                 _line(d, _curve(x, ey + 4, 36, 10, 10, 0, math.pi), s, 9, fill=INK); continue
+            if expr == "wink" and i == 0:
+                _line(d, _curve(x, ey + 4, 36, -14, 10, 0, math.pi), s, 10, fill=INK); continue
             ry = 50 if expr != "shock" else 60; rx = 42 if expr != "shock" else 50
             _ell(d, x, ey, rx, ry, s, fill=WHITE, outline=INK, width=int(4 * s))
+            if expr == "dizzy":  # ojos en espiral
+                pts = [(x + (3 + 2.6 * a) * math.cos(a * (1 if i else -1)), ey + (3 + 2.6 * a) * math.sin(a * (1 if i else -1))) for a in [k * 0.3 for k in range(48)]]
+                _line(d, pts, s, 6, fill=INK); continue
             pr = 21 if expr != "shock" else 12
             px = x + lx * 12 + (6 if (expr == "confused" and i == 0) else -6 if expr == "confused" else 0); py = ey + 6 + ly * 12
             _ell(d, px, py, pr, pr + 2, s, fill=INK); _ell(d, px + 6, py - 7, 5, 5, s, fill=WHITE)
@@ -93,7 +98,12 @@ def draw(expr="neutral", blink=False, look=(0, 0), glasses=False, sash=None, swe
     for x in (270, 490): _ell(d, x, 530, 30, 16, s, fill=(245, 160, 150))
     # boca
     my = 575
-    if expr in ("smug", "proud") or glasses:
+    if expr == "wink":
+        d.chord(((cx - 55) * s, (my - 35) * s, (cx + 55) * s, (my + 30) * s), 10, 170, fill=INK)
+        d.chord(((cx - 42) * s, (my - 26) * s, (cx + 42) * s, (my + 6) * s), 20, 160, fill=WHITE)
+    elif expr == "dizzy":
+        pts = [(cx - 60 + i * 8, my + 9 * math.sin(i * 0.9)) for i in range(16)]; _line(d, pts, s, 9, fill=INK)
+    elif expr in ("smug", "proud") or glasses:
         _line(d, [(cx - 60, my + 5), (cx - 10, my + 12), (cx + 40, my + 2), (cx + 72, my - 22)], s, 10, fill=INK)
         if expr == "proud" or glasses:
             d.chord(((cx - 50) * s, (my - 30) * s, (cx + 60) * s, (my + 30) * s), 10, 170, fill=INK)
