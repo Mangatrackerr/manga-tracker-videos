@@ -60,7 +60,11 @@ def draw(expr="neutral", blink=False, look=(0, 0), glasses=False, sash=None, swe
         _line(d, [(cx - 128, ey - 60), (cx - 30, ey - 70)], s, 14, fill=HAIR); _line(d, [(cx + 30, ey - 76), (cx + 128, ey - 66)], s, 14, fill=HAIR)
     else:
         for i, x in enumerate(ex):
-            if blink:
+            if blink or expr == "cry":
+                if expr == "cry":
+                    _line(d, _curve(x, ey - 6, 36, 14, 10, math.pi, 2 * math.pi), s, 10, fill=INK)
+                    _poly(d, [(x - 14, ey + 8), (x + 14, ey + 8), (x + 20, ey + 210), (x - 20, ey + 210)], s, fill=(120, 190, 255))
+                    continue
                 _line(d, _curve(x, ey + 4, 36, 10, 10, 0, math.pi), s, 9, fill=INK); continue
             ry = 50 if expr != "shock" else 60; rx = 42 if expr != "shock" else 50
             _ell(d, x, ey, rx, ry, s, fill=WHITE, outline=INK, width=int(4 * s))
@@ -73,6 +77,8 @@ def draw(expr="neutral", blink=False, look=(0, 0), glasses=False, sash=None, swe
         # cejas
         if expr == "smug":
             _line(d, [(cx - 120, ey - 58), (cx - 30, ey - 50)], s, 14, fill=HAIR); _line(d, [(cx + 30, ey - 72), (cx + 120, ey - 92)], s, 14, fill=HAIR)
+        elif expr == "cry":
+            _line(d, [(cx - 120, ey - 58), (cx - 30, ey - 78)], s, 14, fill=HAIR); _line(d, [(cx + 30, ey - 78), (cx + 120, ey - 58)], s, 14, fill=HAIR)
         elif expr == "confused":
             _line(d, [(cx - 120, ey - 70), (cx - 30, ey - 58)], s, 14, fill=HAIR); _line(d, [(cx + 30, ey - 50), (cx + 120, ey - 78)], s, 14, fill=HAIR)
         elif expr == "shock":
@@ -92,6 +98,8 @@ def draw(expr="neutral", blink=False, look=(0, 0), glasses=False, sash=None, swe
         if expr == "proud" or glasses:
             d.chord(((cx - 50) * s, (my - 30) * s, (cx + 60) * s, (my + 30) * s), 10, 170, fill=INK)
             d.chord(((cx - 38) * s, (my - 22) * s, (cx + 48) * s, (my + 8) * s), 20, 160, fill=WHITE)
+    elif expr == "cry":
+        d.chord(((cx - 55) * s, (my - 10) * s, (cx + 55) * s, (my + 60) * s), 180, 360, fill=INK)
     elif expr == "confused":
         pts = [(cx - 60 + i * 8, my + 6 * math.sin(i * 1.2)) for i in range(16)]; _line(d, pts, s, 9, fill=INK)
     elif expr == "shock":

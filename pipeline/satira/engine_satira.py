@@ -56,18 +56,24 @@ ROOM = _room()
 ROOM_RED = Image.blend(ROOM, Image.new("RGBA", ROOM.size, (150, 10, 40, 255)), 0.42)
 ROOM_BLUR = Image.blend(ROOM.filter(ImageFilter.GaussianBlur(18)), Image.new("RGBA", ROOM.size, (10, 6, 24, 255)), 0.45)
 
-def _rays(col1=(120, 70, 20), col2=(40, 20, 10), n=18):
-    S = 2600; im = Image.new("RGB", (S, S), col2); d = ImageDraw.Draw(im); c = S / 2
-    for k in range(n):
-        a0 = 2 * math.pi * k / n; a1 = a0 + math.pi / n
-        d.polygon([(c, c), (c + S * math.cos(a0), c + S * math.sin(a0)), (c + S * math.cos(a1), c + S * math.sin(a1))], fill=col1)
-    return im
-_R = _rays(); RAYS = []
-for i in range(36):  # un periodo (360/18 = 20º) en 36 pasos
-    r = _R.rotate(i * 20 / 36, resample=Image.BILINEAR); c = r.width / 2
-    fr = r.crop((int(c - W / 2), int(c - H * 0.38), int(c + W / 2), int(c + H * 0.62))).convert("RGBA")
-    g = Image.new("L", (W, H), 0); ImageDraw.Draw(g).ellipse((-350, -400, W + 350, H * 0.85), fill=255); g = g.filter(ImageFilter.GaussianBlur(220))
-    dk = Image.new("RGBA", (W, H), (12, 6, 4, 255)); dk.putalpha(g.point(lambda v: 255 - v)); fr.alpha_composite(dk); RAYS.append(fr)
+PALS = {"gold": ((120, 70, 20), (40, 20, 10)), "blue": ((30, 90, 170), (8, 22, 60)), "pink": ((160, 50, 120), (50, 10, 40)),
+        "green": ((30, 130, 95), (6, 40, 30)), "red": ((160, 35, 45), (50, 8, 12)), "purple": ((95, 50, 180), (25, 10, 55))}
+_RAYS = {}
+def rays(pal, T):
+    """fondo de rayos girando (24 pasos por periodo de 20º), se genera la primera vez que se usa cada paleta"""
+    if pal not in _RAYS:
+        c1, c2 = PALS[pal]; Sz = 2600; im = Image.new("RGB", (Sz, Sz), c2); d = ImageDraw.Draw(im); c = Sz / 2; n = 18
+        for k in range(n):
+            a0 = 2 * math.pi * k / n; a1 = a0 + math.pi / n
+            d.polygon([(c, c), (c + Sz * math.cos(a0), c + Sz * math.sin(a0)), (c + Sz * math.cos(a1), c + Sz * math.sin(a1))], fill=c1)
+        g = Image.new("L", (W, H), 0); ImageDraw.Draw(g).ellipse((-350, -400, W + 350, H * 0.85), fill=255); g = g.filter(ImageFilter.GaussianBlur(220))
+        dk = Image.new("RGB", (W, H), tuple(int(v * 0.25) for v in c2)); fr_ = []
+        for i in range(24):
+            r = im.rotate(i * 20 / 24, resample=Image.BILINEAR)
+            fr = r.crop((int(c - W / 2), int(c - H * 0.38), int(c + W / 2), int(c + H * 0.62)))
+            fr_.append(Image.composite(fr, dk, g))
+        _RAYS[pal] = fr_
+    return _RAYS[pal][int(T * 8) % 24].convert("RGBA")
 
 def _pedestal():
     s = 2; w, h = 700, 520; im = Image.new("RGBA", (w * s, h * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
@@ -167,13 +173,44 @@ def Sc_intro(tiles_at=(1, 0), count=30, label="SERIES A LA VEZ"):
         ta = at(tiles_at, o); return [(0, "whoosh2", 0.7), (ta, "boom", 0.5)] + [(ta + 0.08 * i, "pop", 0.6) for i in range(8)]
     return draw, sfx
 
-def Sc_reveal(name1, name2, name_at=(0, 0, 0.45)):
+def Sc_hook(icon, texts, pal="blue", stamp_=None, counter=None, icon_y=1000):
+    """GANCHO: icono grande que entra de golpe + textos + contador + sello.
+    texts: [(texto, tamaño, color, t_in, t_out, y)]; stamp_=(texto, t, color, sub); counter=(desde, hasta, sufijo, t, dur, y, color)"""
     def draw(T, d, o):
-        im = RAYS[int(T * 12) % 36].copy()
+        im = rays(pal, T); ts = at(stamp_[1], o) if stamp_ else 1e9
+        sh = 14 * math.sin(T * 80) * max(0, 1 - (T - ts) / 0.3) if T >= ts else 0
+        p = pop(T, 0.0, 0.22); wob = 3 * math.sin(T * 2.2)
+        paste_c(im, icon, W / 2 + sh, icon_y + 10 * math.sin(T * 2.6), 1.05 * p * (1 + 0.02 * math.sin(T * 5)), rot=wob)
+        for (tx, sz, col, t_in, t_out, y) in texts:
+            ti = at(t_in, o); to_ = at(t_out, o) if t_out is not None else 1e9
+            if ti <= T < to_: paste_c(im, big(tx, sz, col, (0, 0, 0) if col != YEL else (110, 40, 0)), W / 2 + sh, y, pop(T, ti, 0.25))
+        if counter:
+            a_, b_, suf, tc, dc, y, col = counter; tc = at(tc, o)
+            if T >= tc:
+                k = ease_out((T - tc) / dc); n = int(round(a_ + (b_ - a_) * k)); s_ = (f"{n:,}".replace(",", ".") if abs(b_) >= 10000 or (b_ >= 1000 and b_ < 1900) else str(n)) + suf
+                paste_c(im, big(s_, 170, YEL, (110, 40, 0)), W / 2 + sh, y, pop(T, tc, 0.25) * (1 + 0.1 * max(0, 1 - abs(T - tc - dc) / 0.15)))
+        if T >= ts:
+            u = T - ts; sc_ = 1 + 1.3 * (1 - ease_out(u / 0.18))
+            paste_c(im, stamp(stamp_[0], stamp_[2], 120, stamp_[3]), W / 2, icon_y - 30, sc_, clamp(u / 0.08), rot=-9)
+        return im
+    def sfx(d, o):
+        ev = [(0, "boom", 1.0), (0.02, "whoosh2", 0.6)]
+        for (_, _, _, t_in, _, _) in texts:
+            if at(t_in, o) > 0.05: ev.append((at(t_in, o), "pop", 0.8))
+        if counter:
+            tc = at(counter[3], o); dc = counter[4]; ev += [(tc + dc * (k / 14) ** 1.5, "tick", 1.2) for k in range(14)] + [(tc + dc, "pop2", 1.0)]
+        if stamp_: ev.append((at(stamp_[1], o) + 0.12, "boom", 1.0))
+        return ev
+    return draw, sfx
+
+def Sc_reveal(name1, name2, name_at=(0, 0, 0.45), obj=None, pal="gold"):
+    OBJ = BRAIN if obj is None else obj
+    def draw(T, d, o):
+        im = rays(pal, T)
         paste_c(im, PEDESTAL, W / 2, 1530, pop(T, 0.0, 0.35))
         rise = ease_out((T - 0.15) / 0.6)
         if T > 0.15:
-            paste_c(im, BRAIN, W / 2, 1180 + 160 * (1 - rise) + 14 * math.sin(T * 3), 0.6 + 0.4 * rise)
+            paste_c(im, OBJ, W / 2, (1180 if obj is None else 1090) + 160 * (1 - rise) + 14 * math.sin(T * 3), (0.6 + 0.4 * rise) * (1 if obj is None else 0.82))
             rnd = random.Random(int(T * 6))
             dr = ImageDraw.Draw(im)
             for k in range(7):  # destellos
@@ -186,10 +223,12 @@ def Sc_reveal(name1, name2, name_at=(0, 0, 0.45)):
         return im
     return draw, lambda d, o: [(0, "boom", 0.8), (0.2, "shine", 0.9), (at(name_at, o), "boom", 0.6)]
 
-def Sc_hud(expr, l1, l2, hud_at=(0, 0, 0.5), arrow=True, glasses=False, meters=None, dot=GREEN):
-    """meters: [(label, valor, texto, tiempo, color)]"""
+def Sc_hud(expr, l1, l2, hud_at=(0, 0, 0.5), arrow=True, glasses=False, meters=None, dot=GREEN, expr2=None, st=None, bg=None):
+    """meters: [(label, valor, texto, tiempo, color)]; expr2=(expr, tiempo, glasses); st=(texto, tiempo, color, sub)"""
     def draw(T, d, o):
-        im = cam(ROOM, T, drift=(6, 0)); char(im, T, expr, glasses=glasses)
+        im = cam(bg or ROOM, T, drift=(6, 0)); e, g = expr, glasses
+        if expr2 and T >= at(expr2[1], o): e, g = expr2[0], expr2[2]
+        char(im, T, e, glasses=g, shake=1 if (st and T >= at(st[1], o) and T < at(st[1], o) + 0.4) else 0)
         if arrow and T > 0.3:
             dr = ImageDraw.Draw(im); k = ease_out((T - 0.3) / 0.3); bx = 900 + 10 * math.sin(T * 8)
             dr.line((bx, 820, bx - 120 * k, 900), fill=YEL, width=16)
@@ -197,11 +236,16 @@ def Sc_hud(expr, l1, l2, hud_at=(0, 0, 0.5), arrow=True, glasses=False, meters=N
         if hud_at is not None: th = at(hud_at, o); paste_c(im, hud(l1, l2, dot), W / 2, 640, pop(T, th, 0.3))
         for i, (lab, val, txt, tm, col) in enumerate(meters or []):
             tm = at(tm, o); k = ease_out((T - tm) / 0.8) * val
-            if T >= tm: paste_c(im, meter(lab, k, txt if k >= val * 0.98 else f"{int(k * 100)} %", col=col), W / 2, 590 + i * 170, pop(T, tm, 0.25))
+            if T >= tm: paste_c(im, meter(lab, k, txt if k >= val * 0.98 else f"{int(k * 100)} %", col=col), W / 2, (590 if hud_at is None else 790) + i * 170, pop(T, tm, 0.25))
+        if st and T >= at(st[1], o):
+            u = T - at(st[1], o); sc_ = 1 + 1.2 * (1 - ease_out(u / 0.18))
+            paste_c(im, stamp(st[0], st[2], 104, st[3]), W / 2, 960 if meters else 820, sc_, clamp(u / 0.08), rot=-7)
         return im
     def sfx(d, o):
         ev = [(at(hud_at, o), "pop2", 1.0)] if hud_at is not None else []
         for (_, _, _, tm, _) in meters or []: ev += [(at(tm, o) + k * 0.05, "tick", 1) for k in range(16)]
+        if st: ev.append((at(st[1], o) + 0.12, "boom", 0.9))
+        if expr2: ev.append((at(expr2[1], o), "pop2", 0.9))
         return ev
     return draw, sfx
 
@@ -223,7 +267,7 @@ def Sc_question(level, hud_l1, cycle, st_txt, st_at=(0, 0, 0.62), st_sub=None):
 def Sc_phone(a, b, callout=None, mode="fit"):
     def draw(T, d, o):
         im = cam(ROOM_BLUR, T, z0=1.0); clip = load_clip(a, b)
-        idx = int(T / d * len(clip)) if mode == "fit" else 0
+        idx = int(T / d * len(clip)) if mode == "fit" else 0  # mode="still": imagen fija
         fr = clip[min(len(clip) - 1, idx)]; k = ease_out(T / 0.45); z = 0.98 + 0.03 * ease_out(T / d)
         ph = PHONE.copy(); ph.paste(fr, (40 + BZ, 40 + BZ), MASK); top = 330 + (1 - k) * 1500
         paste_c(im, ph, W / 2, top + ph.height * z / 2, z)
@@ -240,9 +284,9 @@ def Sc_phone(a, b, callout=None, mode="fit"):
 def char_small(T):
     return PJ.draw("shock", sweat=1).resize((PJ.CW * 2 // 5, PJ.CH * 2 // 5), Image.LANCZOS)
 
-def Sc_ambassador(l1, l2, st_at=(0, 0, 0.55)):
+def Sc_ambassador(l1, l2, st_at=(0, 0, 0.55), pal="gold"):
     def draw(T, d, o):
-        im = RAYS[int(T * 12) % 36].copy(); char(im, T, "proud", y=1330, sc=1.18, glasses=True, sash=True)
+        im = rays(pal, T); char(im, T, "proud", y=1330, sc=1.18, glasses=True, sash=True)
         ts = at(st_at, o)
         if T >= ts:
             u = T - ts; sc = 1 + 1.0 * (1 - ease_out(u / 0.18))

@@ -1,0 +1,188 @@
+# Iconos planos para los ganchos (dibujados con PIL a 2x, sin imágenes externas)
+import math, os, sys
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+HERE = os.path.dirname(os.path.abspath(__file__)); P = os.path.dirname(HERE)
+LG = f"{P}/fonts/LuckiestGuy.ttf"; MB = f"{P}/fonts/Montserrat-Black.ttf"
+S = 2; N = 640
+INK = (22, 16, 30); WHITE = (255, 255, 255); YEL = (255, 225, 77); RED = (230, 50, 80)
+
+def _new(): im = Image.new("RGBA", (N * S, N * S), (0, 0, 0, 0)); return im, ImageDraw.Draw(im)
+def E(d, cx, cy, rx, ry, **kw): d.ellipse(((cx - rx) * S, (cy - ry) * S, (cx + rx) * S, (cy + ry) * S), **kw)
+def R(d, x0, y0, x1, y1, r=0, **kw): d.rounded_rectangle((x0 * S, y0 * S, x1 * S, y1 * S), radius=r * S, **kw)
+def PO(d, pts, **kw): d.polygon([(x * S, y * S) for x, y in pts], **kw)
+def L(d, pts, w, **kw): d.line([(x * S, y * S) for x, y in pts], width=int(w * S), joint="curve", **kw)
+def T(d, cx, cy, txt, size, fill=WHITE, path=LG, stroke=0, sfill=INK):
+    f = ImageFont.truetype(path, size * S); bb = f.getbbox(txt, stroke_width=stroke * S)
+    d.text((cx * S - (bb[0] + bb[2]) / 2, cy * S - (bb[1] + bb[3]) / 2), txt, font=f, fill=fill, stroke_width=stroke * S, stroke_fill=sfill)
+def heart(d, cx, cy, r, col=RED):
+    E(d, cx - r * 0.5, cy - r * 0.2, r * 0.55, r * 0.55, fill=col); E(d, cx + r * 0.5, cy - r * 0.2, r * 0.55, r * 0.55, fill=col)
+    PO(d, [(cx - r * 1.03, cy), (cx + r * 1.03, cy), (cx, cy + r * 1.05)], fill=col)
+def _fin(im):
+    out = im.resize((N, N), Image.LANCZOS)
+    a = out.getchannel("A").filter(ImageFilter.GaussianBlur(12)); sh = Image.new("RGBA", out.size, (0, 0, 0, 0)); sh.putalpha(a.point(lambda v: int(v * 0.5)))
+    res = Image.new("RGBA", out.size, (0, 0, 0, 0)); res.alpha_composite(sh, (8, 16)); res.alpha_composite(out); return res
+
+def pecera():
+    im, d = _new()
+    E(d, 320, 350, 250, 240, fill=(170, 220, 255, 90), outline=(220, 240, 255), width=10 * S)
+    d.chord(((320 - 244) * S, (350 - 234) * S, (320 + 244) * S, (350 + 234) * S), -12, 192, fill=(60, 150, 230, 200))
+    R(d, 170, 95, 470, 125, 15, fill=(220, 240, 255))
+    E(d, 320, 545, 170, 30, fill=(240, 210, 140))
+    # pez
+    PO(d, [(400, 360), (480, 300), (470, 360), (480, 420)], fill=(255, 120, 30))
+    E(d, 320, 360, 105, 70, fill=(255, 150, 40)); E(d, 300, 380, 60, 30, fill=(255, 190, 90))
+    PO(d, [(300, 300), (350, 255), (370, 300)], fill=(255, 120, 30))
+    E(d, 260, 345, 20, 22, fill=WHITE); E(d, 255, 348, 11, 12, fill=INK); E(d, 252, 343, 4, 4, fill=WHITE)
+    L(d, [(225, 385), (240, 392)], 6, fill=INK)
+    for (x, y, r) in [(200, 250, 14), (180, 200, 10), (205, 160, 7)]: E(d, x, y, r, r, outline=WHITE, width=4 * S)
+    return _fin(im)
+
+def tarta(num="10"):
+    im, d = _new()
+    E(d, 320, 560, 260, 40, fill=(230, 230, 240))
+    R(d, 110, 380, 530, 550, 30, fill=(250, 150, 190)); R(d, 110, 380, 530, 420, 20, fill=(255, 245, 250))
+    for x in range(140, 520, 60): E(d, x, 420, 26, 30, fill=(255, 245, 250))
+    R(d, 170, 260, 470, 390, 26, fill=(255, 190, 215)); R(d, 170, 260, 470, 290, 18, fill=(255, 245, 250))
+    for x in range(195, 460, 55): E(d, x, 292, 22, 24, fill=(255, 245, 250))
+    for x, y in [(160, 480), (250, 500), (350, 480), (450, 500), (220, 340), (400, 345)]: E(d, x, y, 9, 9, fill=(200, 60, 120))
+    T(d, 320, 190, num, 150, fill=YEL, stroke=8)
+    for x in (270, 375):
+        E(d, x, 95, 16, 28, fill=(255, 170, 40)); E(d, x, 102, 8, 15, fill=(255, 240, 150))
+    return _fin(im)
+
+def tele(txt="EP 1.100"):
+    im, d = _new()
+    L(d, [(320, 160), (230, 60)], 8, fill=(180, 180, 200)); L(d, [(320, 160), (420, 70)], 8, fill=(180, 180, 200))
+    E(d, 230, 60, 14, 14, fill=RED); E(d, 420, 70, 14, 14, fill=RED)
+    R(d, 60, 150, 580, 520, 50, fill=(60, 50, 90)); R(d, 95, 185, 545, 470, 30, fill=(30, 40, 90))
+    d.rectangle((95 * S, 185 * S, 545 * S, 470 * S), fill=None)
+    for k in range(9): L(d, [(110, 200 + k * 32), (530, 200 + k * 32)], 3, fill=(50, 70, 140))
+    T(d, 320, 300, txt, 92, fill=YEL, stroke=6)
+    T(d, 320, 405, "SIN PARAR", 52, fill=WHITE, path=MB)
+    R(d, 150, 520, 220, 570, 10, fill=(60, 50, 90)); R(d, 420, 520, 490, 570, 10, fill=(60, 50, 90))
+    return _fin(im)
+
+def estudio():
+    im, d = _new()
+    R(d, 110, 80, 530, 590, 30, fill=(150, 100, 60)); R(d, 140, 120, 500, 570, 14, fill=(250, 250, 245))
+    R(d, 240, 60, 400, 130, 20, fill=(120, 120, 140))
+    T(d, 320, 175, "ESTUDIO", 64, fill=INK)
+    for i, h in enumerate([90, 150, 230, 320]):
+        x = 180 + i * 75; R(d, x, 520 - h, x + 55, 520, 8, fill=[(90, 160, 255), (60, 200, 150), (255, 190, 60), (230, 70, 90)][i])
+    L(d, [(180, 470), (260, 420), (340, 340), (440, 230)], 10, fill=INK)
+    PO(d, [(450, 210), (455, 262), (412, 240)], fill=INK)
+    return _fin(im)
+
+def curva():
+    im, d = _new()
+    R(d, 60, 70, 580, 570, 40, fill=(250, 250, 245))
+    L(d, [(130, 120), (130, 500), (540, 500)], 10, fill=INK)
+    pts = [(130 + x, 140 + 330 * (1 - math.exp(-x / 70)) * 0.95) for x in range(0, 401, 10)]
+    L(d, pts, 14, fill=RED)
+    T(d, 330, 545, "TIEMPO", 40, fill=INK, path=MB); T(d, 330, 105, "MEMORIA", 40, fill=INK, path=MB)
+    E(d, 200, 375, 34, 34, fill=YEL, outline=INK, width=5 * S); T(d, 200, 378, "1h", 34, fill=INK, path=MB)
+    return _fin(im)
+
+def calendario(txt="1969", head="DESDE"):
+    im, d = _new()
+    R(d, 80, 90, 560, 570, 40, fill=(250, 250, 245)); R(d, 80, 90, 560, 220, 40, fill=RED); d.rectangle((80 * S, 180 * S, 560 * S, 220 * S), fill=RED)
+    for x in (190, 450): R(d, x - 18, 50, x + 18, 140, 14, fill=(80, 80, 100))
+    T(d, 320, 160, head, 70, fill=WHITE)
+    T(d, 320, 400, txt, 190 if len(txt) <= 4 else 120, fill=INK)
+    return _fin(im)
+
+def pulpo():
+    im, d = _new()
+    col = (190, 90, 230); dk = (150, 60, 190)
+    for k in range(8):
+        a = math.pi * (0.1 + 0.8 * k / 7); pts = []
+        for t in range(14):
+            r = 60 + t * 17; ang = a + 0.35 * math.sin(t * 0.6 + k)
+            pts.append((320 + r * math.cos(ang) * 1.35, 380 + r * math.sin(ang) * 0.75 + t * 6))
+        L(d, pts, 46 - 2.4 * len(pts) * 0.5, fill=dk if k % 2 else col)
+    E(d, 320, 300, 170, 170, fill=col); E(d, 260, 240, 40, 30, fill=(215, 140, 245))
+    for x in (260, 380): E(d, x, 320, 30, 34, fill=WHITE); E(d, x + 4, 326, 15, 17, fill=INK)
+    L(d, [(290, 385), (320, 400), (350, 385)], 8, fill=INK)
+    for i, x in enumerate((170, 320, 470)): heart(d, x, 85 + (20 if i != 1 else 0), 48)
+    return _fin(im)
+
+def estaciones():
+    im, d = _new()
+    cols = [(120, 190, 255), (255, 150, 200), (255, 200, 60), (240, 120, 50)]
+    for i in range(4):
+        r, c = divmod(i, 2); x0 = 70 + c * 260; y0 = 70 + r * 260
+        R(d, x0, y0, x0 + 240, y0 + 240, 40, fill=cols[i]); cx, cy = x0 + 120, y0 + 120
+        if i == 0:
+            for k in range(3):
+                a = k * math.pi / 3; L(d, [(cx - 70 * math.cos(a), cy - 70 * math.sin(a)), (cx + 70 * math.cos(a), cy + 70 * math.sin(a))], 12, fill=WHITE)
+        elif i == 1:
+            for k in range(5): a = k * 2 * math.pi / 5; E(d, cx + 42 * math.cos(a), cy + 42 * math.sin(a), 32, 32, fill=WHITE)
+            E(d, cx, cy, 26, 26, fill=YEL)
+        elif i == 2:
+            for k in range(8): a = k * math.pi / 4; L(d, [(cx + 55 * math.cos(a), cy + 55 * math.sin(a)), (cx + 85 * math.cos(a), cy + 85 * math.sin(a))], 12, fill=WHITE)
+            E(d, cx, cy, 45, 45, fill=WHITE)
+        else:
+            PO(d, [(cx, cy - 80), (cx + 60, cy), (cx, cy + 70), (cx - 60, cy)], fill=(160, 60, 20)); L(d, [(cx, cy - 70), (cx, cy + 90)], 8, fill=(120, 40, 10))
+    return _fin(im)
+
+def ojo():
+    im, d = _new()
+    PO(d, [(40, 320)] + [(40 + 560 * t / 20, 320 - 200 * math.sin(math.pi * t / 20)) for t in range(21)] + [(600, 320)], fill=(80, 40, 60))
+    pts_top = [(60 + 520 * t / 20, 320 - 170 * math.sin(math.pi * t / 20)) for t in range(21)]
+    pts_bot = [(60 + 520 * t / 20, 320 + 170 * math.sin(math.pi * t / 20)) for t in range(21)][::-1]
+    PO(d, pts_top + pts_bot, fill=(255, 240, 240))
+    for (a, b) in [((90, 310), (190, 280)), ((100, 350), (200, 360)), ((550, 300), (450, 270)), ((540, 350), (440, 370)), ((150, 250), (220, 270))]:
+        L(d, [a, ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2 + 12), b], 5, fill=(230, 60, 70))
+    E(d, 320, 320, 120, 120, fill=(110, 70, 200)); E(d, 320, 320, 60, 60, fill=INK); E(d, 290, 285, 22, 22, fill=WHITE)
+    L(d, pts_top, 14, fill=INK)
+    return _fin(im)
+
+def vacas():
+    im, d = _new()
+    def cara(cx, cy, flip):
+        for sx in (-1, 1): PO(d, [(cx + sx * 80, cy - 90), (cx + sx * 110, cy - 160), (cx + sx * 120, cy - 80)], fill=(240, 220, 180))
+        for sx in (-1, 1): E(d, cx + sx * 140, cy - 50, 55, 25, fill=(250, 250, 250), outline=INK, width=4 * S)
+        E(d, cx, cy, 120, 135, fill=(250, 250, 250), outline=INK, width=5 * S)
+        E(d, cx + flip * 50, cy - 70, 45, 35, fill=INK); E(d, cx - flip * 70, cy + 10, 25, 30, fill=INK)
+        E(d, cx, cy + 85, 95, 60, fill=(255, 175, 185), outline=INK, width=4 * S)
+        E(d, cx - 35, cy + 85, 12, 16, fill=(200, 90, 110)); E(d, cx + 35, cy + 85, 12, 16, fill=(200, 90, 110))
+        for x in (cx - 45, cx + 45): E(d, x, cy - 20, 17, 20, fill=INK); E(d, x + 5, cy - 26, 6, 6, fill=WHITE)
+    cara(175, 370, 1); cara(465, 370, -1)
+    heart(d, 320, 130, 70)
+    return _fin(im)
+
+def reloj(hora="4:00"):
+    im, d = _new()
+    for x in (180, 460): E(d, x, 130, 70, 55, fill=(240, 60, 80)); L(d, [(x, 175), (x + (40 if x < 320 else -40), 220)], 14, fill=INK)
+    E(d, 320, 360, 230, 230, fill=(240, 60, 80)); E(d, 320, 360, 190, 190, fill=(255, 250, 240))
+    for k in range(12):
+        a = k * math.pi / 6; L(d, [(320 + 160 * math.cos(a), 360 + 160 * math.sin(a)), (320 + 180 * math.cos(a), 360 + 180 * math.sin(a))], 8, fill=INK)
+    L(d, [(320, 360), (320, 210)], 12, fill=INK); L(d, [(320, 360), (320 + 105 * 0.866, 360 + 105 * 0.5)], 16, fill=INK)  # 4:00
+    T(d, 320, 470, hora, 60, fill=RED, path=MB)
+    E(d, 320, 360, 16, 16, fill=INK)
+    for x in (200, 440): L(d, [(x, 580), (x - (30 if x < 320 else -30), 620)], 16, fill=INK)
+    return _fin(im)
+
+def reloj_arena():
+    im, d = _new()
+    R(d, 140, 50, 500, 100, 20, fill=(150, 100, 60)); R(d, 140, 560, 500, 610, 20, fill=(150, 100, 60))
+    PO(d, [(180, 100), (460, 100), (340, 330), (300, 330)], fill=(210, 235, 255)); PO(d, [(180, 560), (460, 560), (340, 330), (300, 330)], fill=(210, 235, 255))
+    PO(d, [(250, 200), (390, 200), (330, 320), (310, 320)], fill=(255, 200, 80)); PO(d, [(200, 560), (440, 560), (320, 440)], fill=(255, 200, 80))
+    L(d, [(320, 330), (320, 470)], 6, fill=(255, 200, 80))
+    for x in (160, 480): L(d, [(x, 100), (x, 560)], 14, fill=(150, 100, 60))
+    return _fin(im)
+
+def pergamino():
+    im, d = _new()
+    R(d, 160, 30, 480, 610, 20, fill=(250, 240, 210))
+    for y in range(90, 590, 42):
+        L(d, [(200, y), (200 + 16, y)], 10, fill=(60, 200, 130)); L(d, [(235, y), (430 - (y * 37) % 90, y)], 10, fill=(150, 140, 120))
+    R(d, 140, 10, 500, 60, 25, fill=(200, 160, 100)); R(d, 140, 590, 500, 640, 25, fill=(200, 160, 100))
+    return _fin(im)
+
+ICONS = {"pecera": pecera, "tarta": tarta, "tele": tele, "estudio": estudio, "curva": curva, "calendario": calendario, "pulpo": pulpo,
+         "estaciones": estaciones, "ojo": ojo, "vacas": vacas, "reloj": reloj, "reloj_arena": reloj_arena, "pergamino": pergamino}
+if __name__ == "__main__":
+    ks = list(ICONS); sheet = Image.new("RGBA", (N * 5, N * 3), (40, 30, 60, 255))
+    for i, k in enumerate(ks): sheet.alpha_composite(ICONS[k](), ((i % 5) * N, (i // 5) * N))
+    sheet.convert("RGB").resize((N * 5 // 2, N * 3 // 2)).save(sys.argv[1])
