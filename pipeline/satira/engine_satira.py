@@ -236,7 +236,7 @@ def Sc_hud(expr, l1, l2, hud_at=(0, 0, 0.5), arrow=True, glasses=False, meters=N
         if hud_at is not None: th = at(hud_at, o); paste_c(im, hud(l1, l2, dot), W / 2, 640, pop(T, th, 0.3))
         for i, (lab, val, txt, tm, col) in enumerate(meters or []):
             tm = at(tm, o); k = ease_out((T - tm) / 0.8) * val
-            if T >= tm: paste_c(im, meter(lab, k, txt if k >= val * 0.98 else f"{int(k * 100)} %", col=col), W / 2, (590 if hud_at is None else 790) + i * 170, pop(T, tm, 0.25))
+            if T >= tm: paste_c(im, meter(lab, k, txt if k >= val * 0.98 else f"{int(k * 100)} %", col=col), W / 2, (590 if hud_at is None else 830) + i * 170, pop(T, tm, 0.25))
         if st and T >= at(st[1], o):
             u = T - at(st[1], o); sc_ = 1 + 1.2 * (1 - ease_out(u / 0.18))
             paste_c(im, stamp(st[0], st[2], 104, st[3]), W / 2, 960 if meters else 820, sc_, clamp(u / 0.08), rot=-7)
@@ -278,7 +278,7 @@ def Sc_phone(a, b, callout=None, mode="fit"):
                 sx = W / 2 - ph.width * z / 2 + (40 + BZ + fx * SCR_W) * z; sy = top + (40 + BZ + (fy - CROP) / (1 - CROP) * SCR_H) * z
                 dr = ImageDraw.Draw(im); R = 95 * min(p, 1.2)
                 dr.ellipse((sx - R * 1.3, sy - R * 0.75, sx + R * 1.3, sy + R * 0.75), outline=YEL, width=9)
-                paste_c(im, pill(label, 66, fg=DARK, bg=YEL), clamp(sx + 330, 260, W - 230), sy - 160, p, rot=5)
+                paste_c(im, pill(label, 66, fg=DARK, bg=YEL), clamp(sx + 330, 260, W - 230), sy - 160 if sy - 160 >= 560 else sy + 150, p, rot=5)  # sin chocar con los subtítulos
         return im
     return draw, lambda d, o: [(0, "whoosh2", 0.8)] + ([(at(callout[3], o), "pop2", 1.2)] if callout else [])
 def char_small(T):

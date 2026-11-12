@@ -50,7 +50,7 @@ def tarta(num="10"):
         E(d, x, 95, 16, 28, fill=(255, 170, 40)); E(d, x, 102, 8, 15, fill=(255, 240, 150))
     return _fin(im)
 
-def tele(txt="EP 1.100"):
+def tele(txt="EP 1.100", sub="SIN PARAR"):
     im, d = _new()
     L(d, [(320, 160), (230, 60)], 8, fill=(180, 180, 200)); L(d, [(320, 160), (420, 70)], 8, fill=(180, 180, 200))
     E(d, 230, 60, 14, 14, fill=RED); E(d, 420, 70, 14, 14, fill=RED)
@@ -58,7 +58,7 @@ def tele(txt="EP 1.100"):
     d.rectangle((95 * S, 185 * S, 545 * S, 470 * S), fill=None)
     for k in range(9): L(d, [(110, 200 + k * 32), (530, 200 + k * 32)], 3, fill=(50, 70, 140))
     T(d, 320, 300, txt, 92, fill=YEL, stroke=6)
-    T(d, 320, 405, "SIN PARAR", 52, fill=WHITE, path=MB)
+    if sub: T(d, 320, 405, sub, 52, fill=WHITE, path=MB)
     R(d, 150, 520, 220, 570, 10, fill=(60, 50, 90)); R(d, 420, 520, 490, 570, 10, fill=(60, 50, 90))
     return _fin(im)
 
@@ -180,9 +180,82 @@ def pergamino():
     R(d, 140, 10, 500, 60, 25, fill=(200, 160, 100)); R(d, 140, 590, 500, 640, 25, fill=(200, 160, 100))
     return _fin(im)
 
+def ambulancia():
+    im, d = _new()
+    R(d, 40, 200, 470, 500, 40, fill=(250, 250, 250)); R(d, 440, 280, 610, 500, 40, fill=(250, 250, 250))
+    R(d, 470, 300, 590, 390, 20, fill=(120, 190, 240))
+    d.rectangle((40 * S, 400 * S, 610 * S, 430 * S), fill=RED)
+    R(d, 190, 250, 330, 390, 10, fill=WHITE); d.rectangle((235 * S, 265 * S, 285 * S, 375 * S), fill=RED); d.rectangle((205 * S, 295 * S, 315 * S, 345 * S), fill=RED)
+    R(d, 200, 160, 300, 205, 14, fill=(80, 140, 255)); R(d, 300, 160, 380, 205, 14, fill=RED)
+    for x in (150, 500): E(d, x, 510, 62, 62, fill=INK); E(d, x, 510, 28, 28, fill=(180, 180, 190))
+    return _fin(im)
+
+def web_caida():
+    im, d = _new()
+    R(d, 40, 90, 600, 540, 36, fill=(245, 245, 250)); R(d, 40, 90, 600, 170, 36, fill=(60, 60, 80)); d.rectangle((40 * S, 140 * S, 600 * S, 170 * S), fill=(60, 60, 80))
+    for i, c in enumerate([(240, 80, 80), (250, 190, 60), (80, 200, 120)]): E(d, 90 + i * 45, 130, 14, 14, fill=c)
+    # calavera pirata
+    E(d, 320, 320, 105, 95, fill=INK); R(d, 260, 360, 380, 440, 20, fill=INK)
+    E(d, 280, 315, 28, 30, fill=WHITE); E(d, 360, 315, 28, 30, fill=WHITE); PO(d, [(320, 345), (305, 375), (335, 375)], fill=WHITE)
+    for x in (285, 310, 335, 360): L(d, [(x, 405), (x, 440)], 6, fill=WHITE)
+    L(d, [(180, 470), (460, 200)], 18, fill=INK); L(d, [(180, 200), (460, 470)], 18, fill=INK)
+    T(d, 320, 500, "ERROR 404", 44, fill=RED, path=MB)
+    return _fin(im)
+
+def ticket():
+    im, d = _new()
+    pts = [(150, 60), (490, 60), (490, 560)] + [(490 - k * 34, 560 + (18 if k % 2 else 0)) for k in range(11)] + [(150, 560)]
+    PO(d, pts, fill=(255, 252, 240))
+    T(d, 320, 120, "PEDIDO", 60, fill=INK)
+    for k, (a, b) in enumerate([("2 CAFÉS", "3,00"), ("1 TOSTADA", "2,50"), ("1 ZUMO", "2,20"), ("1 TARTA", "3,80")]):
+        y = 210 + k * 60; T(d, 260, y, a, 29, fill=INK, path=MB); T(d, 435, y, b, 29, fill=INK, path=MB)
+    L(d, [(180, 455), (460, 455)], 4, fill=INK); T(d, 255, 500, "TOTAL", 40, fill=INK, path=MB); T(d, 430, 500, "11,50", 40, fill=INK, path=MB)
+    return _fin(im)
+
+def saco_yen():
+    im, d = _new()
+    E(d, 320, 400, 210, 190, fill=(200, 150, 70)); PO(d, [(250, 230), (390, 230), (430, 170), (210, 170)], fill=(200, 150, 70))
+    R(d, 230, 205, 410, 245, 18, fill=(150, 100, 40)); E(d, 260, 330, 50, 70, fill=(225, 180, 100))
+    T(d, 320, 420, "¥", 220, fill=YEL, stroke=8, sfill=(120, 70, 20))
+    for (x, y) in [(120, 560), (190, 590), (470, 575), (540, 550)]: E(d, x, y, 48, 20, fill=(255, 210, 70), outline=(180, 130, 30), width=4 * S)
+    return _fin(im)
+
+def quesito(pct=0.52, txt="1 DE CADA 2"):
+    im, d = _new()
+    E(d, 320, 310, 250, 250, fill=(70, 70, 100))
+    d.pieslice(((320 - 250) * S, (310 - 250) * S, (320 + 250) * S, (310 + 250) * S), -90, -90 + 360 * pct, fill=(230, 50, 80))
+    E(d, 320, 310, 110, 110, fill=(30, 22, 54)); T(d, 320, 312, "+50%", 64, fill=WHITE)
+    return _fin(im)
+
+def trofeo():
+    im, d = _new()
+    PO(d, [(170, 90), (470, 90), (430, 330), (210, 330)], fill=(255, 200, 60)); E(d, 320, 330, 110, 60, fill=(255, 200, 60))
+    for sx in (-1, 1): d.arc(((320 + sx * 160 - 70) * S, 120 * S, (320 + sx * 160 + 70) * S, 280 * S), 90 if sx > 0 else -90, 270 if sx > 0 else 90, fill=(255, 200, 60), width=22 * S)
+    R(d, 290, 380, 350, 470, 10, fill=(230, 170, 40)); R(d, 200, 470, 440, 560, 20, fill=(120, 80, 50)); R(d, 230, 490, 410, 540, 12, fill=(255, 220, 120))
+    T(d, 320, 515, "TOP 20", 40, fill=INK, path=MB)
+    PO(d, [(320, 140), (338, 190), (390, 190), (348, 222), (364, 272), (320, 242), (276, 272), (292, 222), (250, 190), (302, 190)], fill=WHITE)
+    return _fin(im)
+
+def lapiz_moneda():
+    im, d = _new()
+    PO(d, [(110, 470), (420, 160), (500, 240), (190, 550)], fill=(255, 200, 60)); PO(d, [(110, 470), (190, 550), (80, 580)], fill=(240, 210, 170))
+    PO(d, [(80, 580), (95, 535), (125, 565)], fill=INK); PO(d, [(420, 160), (460, 120), (540, 200), (500, 240)], fill=(240, 120, 140))
+    L(d, [(150, 510), (460, 200)], 6, fill=(220, 160, 40))
+    E(d, 470, 470, 110, 110, fill=(255, 210, 70), outline=(180, 130, 30), width=8 * S); T(d, 470, 474, "¥", 120, fill=(180, 130, 30))
+    return _fin(im)
+
+def globo():
+    im, d = _new()
+    E(d, 300, 330, 230, 230, fill=(70, 150, 240))
+    for blob in [[(200, 200), (290, 160), (330, 230), (270, 300), (190, 280)], [(330, 330), (420, 300), (460, 380), (400, 470), (340, 430)], [(150, 360), (220, 380), (230, 460), (170, 470)]]:
+        PO(d, blob, fill=(80, 200, 120))
+    L(d, [(380, 560), (480, 440), (540, 470), (620, 330)], 22, fill=YEL); PO(d, [(625, 290), (635, 365), (580, 340)], fill=YEL)
+    return _fin(im)
+
 ICONS = {"pecera": pecera, "tarta": tarta, "tele": tele, "estudio": estudio, "curva": curva, "calendario": calendario, "pulpo": pulpo,
-         "estaciones": estaciones, "ojo": ojo, "vacas": vacas, "reloj": reloj, "reloj_arena": reloj_arena, "pergamino": pergamino}
+         "estaciones": estaciones, "ojo": ojo, "vacas": vacas, "reloj": reloj, "reloj_arena": reloj_arena, "pergamino": pergamino, "ambulancia": ambulancia, "web_caida": web_caida, "ticket": ticket, "saco_yen": saco_yen,
+         "quesito": quesito, "trofeo": trofeo, "lapiz_moneda": lapiz_moneda, "globo": globo}
 if __name__ == "__main__":
-    ks = list(ICONS); sheet = Image.new("RGBA", (N * 5, N * 3), (40, 30, 60, 255))
+    ks = list(ICONS)[-8:]; sheet = Image.new("RGBA", (N * 5, N * 3), (40, 30, 60, 255))
     for i, k in enumerate(ks): sheet.alpha_composite(ICONS[k](), ((i % 5) * N, (i // 5) * N))
     sheet.convert("RGB").resize((N * 5 // 2, N * 3 // 2)).save(sys.argv[1])

@@ -82,6 +82,15 @@ TRACKS = {
     "lofi5": dict(bpm=82, chords=[[52, 62, 66, 69, 73], [57, 61, 64, 68, 71], [54, 61, 64, 68, 69], [59, 63, 66, 69, 73]], lead="kalimba", seed=13),  # Emaj9-ish A F#m B
     "lofi6": dict(bpm=90, chords=[[48, 64, 67, 71, 74], [45, 64, 67, 72, 76], [53, 64, 69, 72, 76], [55, 62, 65, 71, 74]], lead="marimba", seed=17, drums=True),  # Cmaj9 Am7 Fmaj9 G7
 }
+# lofi7..lofi20: variaciones (transposición, tempo, instrumento y melodía distintos) para que cada vídeo tenga la suya
+_base = list(TRACKS.values()); _leads = ["kalimba", "pluck", "marimba", "pad"]
+for i in range(7, 21):
+    b = _base[(i * 5) % 6]; tr = [-3, -2, 2, 3, -1, 1, 4, -4][i % 8]
+    TRACKS[f"lofi{i}"] = dict(bpm=int(b["bpm"] + [-6, -3, 0, 3, 5, -8, 2][i % 7]), chords=[[n + tr for n in c] for c in b["chords"]],
+                              lead=_leads[i % 4], seed=100 + i * 7, mel_density=[0.3, 0.4, 0.5][i % 3])
 if __name__ == "__main__":
+    import sys
     os.makedirs(OUTD, exist_ok=True)
-    for k, v in TRACKS.items(): track(k, **v)
+    for k, v in TRACKS.items():
+        if len(sys.argv) > 1 and k not in sys.argv[1:]: continue
+        track(k, **v)
