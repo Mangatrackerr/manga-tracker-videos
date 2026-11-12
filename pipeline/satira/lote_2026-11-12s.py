@@ -55,7 +55,7 @@ V["03_casi_entero"] = ("chico", "n3", [
     ("Mándaselo a ese que se lo ha visto *casi entero*.", "Mándaselo a ese que se lo ha visto casi entero."), (FIN, FIN)], [
     ([0, 1], Sc_hook(IC.tele(), [("DEL TIRÓN:", 100, WHITE, 0.15, q(1), Y1), ("+2 SEMANAS", 170, YEL, 0.45, q(1), Y2), ("EPISODIOS", 110, WHITE, q(1), None, Y1)],
                      pal="red", counter=(0, 1100, "+", q(1), 1.2, Y2, YEL)), 0),
-    ([2, 3], Sc_hud("smug", "", "", hud_at=None, arrow=False, glasses=True, meters=[("LO QUE DICE", 0.97, "CASI ENTERO", q(0, 0.5), GREEN), ("LO QUE LLEVA DE VERDAD", 0.055, "61 / 1.100", q(1, 0.4), RED)],
+    ([2, 3], Sc_hud("smug", "", "", hud_at=None, arrow=False, glasses=True, meters=[("LO QUE DICE", 0.97, "CASI ENTERO", q(0, 0.5), GREEN), ("LO QUE LLEVA", 0.055, "61 / 1.100", q(1, 0.4), RED)],
                     st=("PILLADO", q(1, 0.85), RED, None)), 0),
     ([4], Sc_phone(*EPIS, callout=(0.25, 0.455, "EPISODIO EXACTO", q(0, 0.55))), 0),
     ([5], Sc_ambassador("CAMPEÓN DEL", "\"CASI ENTERO\"", pal="red"), 0),

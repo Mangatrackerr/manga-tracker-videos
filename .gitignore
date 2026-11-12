@@ -4,3 +4,4 @@ pipeline/music
 pipeline/build/
 pipeline/in.mp4
 __pycache__/
+pipeline/supertonic/

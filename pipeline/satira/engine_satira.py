@@ -311,6 +311,9 @@ def _shine():
     return 0.12 * y
 SFX["shine"] = _shine()
 
+# cadena de voz opcional (p. ej. EQ de presencia + compresión tipo micro de creador); termina en coma
+VOICE_CHAIN = ""
+
 # ---------- subtítulos ARRIBA, palabra a palabra (las palabras entre *asteriscos* en amarillo) ----------
 CAP_HDR = M.HDR.split("[Events]")[0].replace("Style: Title", "Style: Cap,MTBlack,94,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,1,0,1,9,5,8,60,60,300,1\nStyle: Title") + "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
 def cap_groups(show):
@@ -378,7 +381,7 @@ def render(name, voice, music, lines, scenes, outdir, frames=None):
         for t_, kind, g in prim[1](d, offs): add(fx, SFX[kind], s0 + t_, g)
     sf.write(f"{wd}/vo.wav", vo, SR); sf.write(f"{wd}/fx.wav", fx, SR)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{wd}/list.txt", "-c", "copy", f"{wd}/allv.mp4"], check=True)
-    fc = (f"[0:v]subtitles={wd}/s.ass:fontsdir={P}/fonts[v];[1:a]asplit[vo][sc];"
+    fc = (f"[0:v]subtitles={wd}/s.ass:fontsdir={P}/fonts[v];[1:a]{VOICE_CHAIN}asplit[vo][sc];"
           f"[3:a]atrim=0:{total},afade=t=in:d=0.3,afade=t=out:st={total - 1.3}:d=1.3,volume=0.28[mu];"
           f"[mu][sc]sidechaincompress=threshold=0.02:ratio=5:attack=15:release=350[mud];"
           f"[vo][mud][2:a]amix=inputs=3:normalize=0,atrim=0:{total},loudnorm=I=-14:TP=-1.5:LRA=9,volume=2.2dB,alimiter=limit=0.85[au]")
