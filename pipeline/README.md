@@ -81,3 +81,17 @@ Lote de ejemplo (20 temas): `pipeline/gancho/lote_2026-11-07g.py`. Necesita el m
 - Clips útiles de `procesadas/grabacion_2026-11-02.mp4` (s): estrenos 1.2–5.5 · ficha+añadir 13.5–17.5 · inicio 19.5–24 · filtros 26.6–28.8 (demografía y=0.854, isekai 0.32/0.589) ·
   comedia 32–38 · buscar con pestañas 47.5 (Novelas 0.87/0.165) · episodios 62–66 · manga/manhwa 72–80 · Mi Lista 90.1–92.6 (Ep. 7 0.09/0.594) · ficha 12 ep. 97.3 ·
   añadir a top tier 98–99.8 · mis listas 105–108.2 · amigo 121.3–124.5 · perfil fijo 127.75 (167 0.22/0.487, 120 0.13/0.60, 38 0.5/0.60) · estados fijo 129.5 (completado 0.80/0.388, en pausa 0.80/0.452, abandonado 0.80/0.515) · medallas fijo 131.0 (10/12 0.875/0.182).
+
+
+## Estilo satírico (aprobado por Xavi el 13/11/2026 — PREFERIDO)
+Basado en el trend de explainers satíricos animados ("¿Sabías que…?" con tono irónico). Motor: `pipeline/satira/engine_satira.py`.
+- Estructura: **GANCHO potente 0–5 s** (`Sc_hook`: icono grande + cifra/contador + sello; dato de industria, noticia reciente o curiosidad,
+  aunque no sea del nicho) → **sátira** con el personaje plano (`Sc_hud` con medidores/sellos, `Sc_question` con HUD que no acierta, `Sc_reveal` "invento™" en pedestal)
+  → **app en el móvil** (`Sc_phone` con callout) → **"Mándaselo a…"** (`Sc_ambassador`) → cierre `Sc_end`.
+- Subtítulos ARRIBA palabra a palabra; las palabras entre *asteriscos* salen en amarillo. Fondos de rayos (`pal`: gold/blue/pink/green/red/purple).
+- Personaje: `personaje.py` (expresiones neutral/smug/confused/shock/proud/cry, gafas, banda). Iconos: `iconos.py` (todo dibujado, sin imágenes de terceros).
+- Voz: Supertonic 3 (modelo en `pipeline/supertonic/`, se descarga de
+  https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/sherpa-onnx-supertonic-3-tts-int8-2026-05-11.tar.bz2; `pip install sherpa-onnx pyworld`).
+  `voz_viva.patch(M)`: frase a frase, 4 tomas y se elige la más expresiva; texto con ¡! ¿? y "…" para dar vida. El retoque de tono (WORLD) está DESACTIVADO porque sonaba robótico.
+- Música: `python3 pipeline/satira/lofi.py` genera lofi1..lofi20 (originales). Una distinta por vídeo, volumen 0.2.
+- Nada de destellos/parpadeos rápidos (vídeo del episodio de Porygon). Solo datos comprobados; nada de tragedias reales (p. ej. Kyoto Animation) como gancho.
