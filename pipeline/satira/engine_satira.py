@@ -313,6 +313,7 @@ SFX["shine"] = _shine()
 
 # cadena de voz opcional (p. ej. EQ de presencia + compresión tipo micro de creador); termina en coma
 VOICE_CHAIN = ""
+MUSIC_VOL = 0.28  # volumen de la música (lo-fi tranquila: ~0.16)
 
 # ---------- subtítulos ARRIBA, palabra a palabra (las palabras entre *asteriscos* en amarillo) ----------
 CAP_HDR = M.HDR.split("[Events]")[0].replace("Style: Title", "Style: Cap,MTBlack,94,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,1,0,1,9,5,8,60,60,300,1\nStyle: Title") + "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
@@ -382,8 +383,8 @@ def render(name, voice, music, lines, scenes, outdir, frames=None):
     sf.write(f"{wd}/vo.wav", vo, SR); sf.write(f"{wd}/fx.wav", fx, SR)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{wd}/list.txt", "-c", "copy", f"{wd}/allv.mp4"], check=True)
     fc = (f"[0:v]subtitles={wd}/s.ass:fontsdir={P}/fonts[v];[1:a]{VOICE_CHAIN}asplit[vo][sc];"
-          f"[3:a]atrim=0:{total},afade=t=in:d=0.3,afade=t=out:st={total - 1.3}:d=1.3,volume=0.28[mu];"
-          f"[mu][sc]sidechaincompress=threshold=0.02:ratio=5:attack=15:release=350[mud];"
+          f"[3:a]atrim=0:{total},afade=t=in:d=0.3,afade=t=out:st={total - 1.3}:d=1.3,volume={MUSIC_VOL}[mu];"
+          f"[mu][sc]sidechaincompress=threshold=0.03:ratio=3:attack=30:release=500[mud];"
           f"[vo][mud][2:a]amix=inputs=3:normalize=0,atrim=0:{total},loudnorm=I=-14:TP=-1.5:LRA=9,volume=2.2dB,alimiter=limit=0.85[au]")
     os.makedirs(outdir, exist_ok=True); out = f"{outdir}/{name}.mp4"; tmp = f"{outdir}/{name}.tmp.mp4"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"{wd}/allv.mp4", "-i", f"{wd}/vo.wav", "-i", f"{wd}/fx.wav", "-stream_loop", "-1", "-i", f"{P}/music/{music}.wav",

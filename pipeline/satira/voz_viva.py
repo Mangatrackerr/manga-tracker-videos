@@ -53,6 +53,7 @@ def _intonate(x, sr, kind):
 
 SPEED = {"!": 1.13, "?": 1.06, "…": 0.98, ".": 1.05}
 PAUSE = {"!": 0.16, "?": 0.2, "…": 0.42, ".": 0.24}
+RETOQUE = False  # el retoque WORLD daba un toque robótico (feedback de Xavi 12/11): desactivado
 def tts_viva(text, voice, fn, takes=4):
     sid = int(voice[2:])
     parts = [p for p in re.split(r"(?<=[.!?…])\s+", text.strip()) if p]
@@ -65,7 +66,7 @@ def tts_viva(text, voice, fn, takes=4):
             x, sr = _gen(txt, sid, SPEED[kind] * (1 + 0.03 * (k - 1.5)))
             sc = _score(x, sr, kind)
             if sc > bs: best, bs = x, sc
-        y = _intonate(best, sr, kind)
+        y = _intonate(best, sr, kind) if RETOQUE else best
         out.append(y)
         if i < len(parts) - 1: out.append(np.zeros(int(PAUSE[kind] * sr)))
     a = np.concatenate(out); a = a / (np.abs(a).max() + 1e-9) * 0.9

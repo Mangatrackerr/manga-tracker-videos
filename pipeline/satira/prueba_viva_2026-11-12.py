@@ -7,9 +7,11 @@ sys.path.insert(0, HERE)
 from engine_satira import *
 import engine_satira as ES, iconos as IC, voz_viva
 voz_viva.patch(M)
-ES.VOICE_CHAIN = "highpass=f=85,equalizer=f=3200:t=q:w=1.2:g=3,equalizer=f=220:t=q:w=1:g=1.5,acompressor=threshold=0.08:ratio=3:attack=5:release=90,"
+ES.VOICE_CHAIN = "highpass=f=75,equalizer=f=3000:t=q:w=1.4:g=1.2,acompressor=threshold=0.15:ratio=2:attack=10:release=150,"
+ES.MUSIC_VOL = 0.16
 OUT = os.path.abspath(os.path.join(HERE, "..", "..", "videos"))
-VOCES = {"chico1": "st5", "chica1": "st0", "chica2": "st1", "chica5": "st4"}
+VOCES = {"chico1": "st5", "chica1": "st0", "chica5": "st4"}
+MUSICA = {"chico1": "lofi1", "chica1": "lofi2", "chica5": "lofi3"}
 EPIS = (62.0, 66.0); Y1, Y2 = 1450, 1630
 q = lambda k, f=0.0: (k, 0, f)
 FIN = "Manga Tracker. ¡Gratis en Play Store!"
@@ -33,5 +35,5 @@ if __name__ == "__main__":
     a = sys.argv[1:]; chk = "chk" in a; sel = [x for x in a if x in VOCES] or list(VOCES)
     for v in sel:
         n = f"2026-11-12v_casi_entero_{v}"
-        if chk: print(render(n, VOCES[v], "n3", LINES, SCENES, OUT, frames=[(0, 0.3), (0, 4.0), (1, 1.0), (1, 3.5), (3, 1.0)])); continue
-        print(render(n, VOCES[v], "n3", LINES, SCENES, OUT), flush=True)
+        if chk: print(render(n, VOCES[v], MUSICA[v], LINES, SCENES, OUT, frames=[(0, 0.3), (0, 4.0), (1, 1.0), (1, 3.5), (3, 1.0)])); continue
+        print(render(n, VOCES[v], MUSICA[v], LINES, SCENES, OUT), flush=True)
