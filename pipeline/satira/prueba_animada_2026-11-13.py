@@ -6,13 +6,13 @@ os.environ["SRC_VIDEO"] = os.path.abspath(os.path.join(HERE, "..", "..", "proces
 sys.path.insert(0, HERE)
 import numpy as np
 from engine_satira import *
-import engine_satira as ES, iconos as IC, voz_viva, monigote as MO
+import engine_satira as ES, iconos as IC, voz_viva, monigote2 as MO
 from PIL import Image, ImageDraw, ImageFilter
 voz_viva.patch(M)
 ES.VOICE_CHAIN = "highpass=f=75,equalizer=f=3000:t=q:w=1.4:g=1.2,acompressor=threshold=0.15:ratio=2:attack=10:release=150,"
 ES.MUSIC_VOL = 0.2
 OUT = os.path.abspath(os.path.join(HERE, "..", "..", "videos"))
-NAME = "2026-11-13a_685_ninos_animado_chico"
+NAME = "2026-11-13b_685_ninos_animado_chico"
 q = lambda k, f=0.0: (k, 0, f)
 FOOT = 1830  # altura de los pies del muñeco
 
@@ -24,10 +24,10 @@ def put(im, T, o, track, cx=W / 2, foot=FOOT, sc=1.0, dx=0, dy=0, bob=True, **kw
     blink = (T % 3.3) > 3.18 and expr not in ("dizzy", "cry", "wink")
     c = MO.draw(pose, expr, hands, blink=blink, **{**extra, **kw})
     if sc != 1.0: c = c.resize((int(c.width * sc), int(c.height * sc)), Image.BILINEAR)
-    x0 = cx + dx - MO.HX * sc; y0 = foot + dy - (MO.HY + 280) * sc
+    x0 = cx + dx - MO.HX * sc; y0 = foot + dy - MO.FOOT_Y * sc
     im.alpha_composite(c, (int(x0), int(y0)))
     # posición aproximada de la cabeza (para estrellas, interrogaciones…)
-    return (cx + dx + pose.get("x", 0) * sc, y0 + (MO.HY + pose.get("y", 0) - 225 - 140) * sc)
+    return (cx + dx + pose.get("x", 0) * sc, y0 + (MO.HY + pose.get("y", 0) - 348) * sc)
 
 def star(d, x, y, r, col=YEL):
     pts = []
@@ -118,7 +118,7 @@ PJ_SK = MO.SK
 # ---------- escenas ----------
 def S_ambulance():
     amb = IC.ambulancia()
-    tr = MO.Track([(0.0, dict(MO.P["stand"], x=700), "neutral", ("fist", "fist")), (0.55, dict(MO.P["stand"], x=40), "neutral", ("fist", "fist")),
+    tr = MO.Track([(0.0, dict(MO.P["run"], x=700), "neutral", ("fist", "fist")), (0.55, dict(MO.P["run"], x=40), "neutral", ("fist", "fist")),
                    (0.85, MO.P["shock"], "shock", ("open", "open")), (q(0, 0.75), MO.P["point_l"], "shock", ("point", "fist"))])
     def draw(T, d, o):
         im = street(T, scroll=max(0, 1 - T / 0.8)); k = ease_out(T / 0.8)
@@ -127,6 +127,8 @@ def S_ambulance():
         gl = Image.new("RGBA", (W, H), (0, 0, 0, 0)); gd = ImageDraw.Draw(gl); a = 0.5 + 0.2 * math.sin(T * 6)
         gd.ellipse((ax - 160, ay - 420, ax + 140, ay - 120), fill=(255, 60, 70, int(80 * a))); im.alpha_composite(gl.filter(ImageFilter.GaussianBlur(40)))
         run = T < 0.55
+        if run:
+            ph_ = math.sin(T * 22); tr.keys[0][1].update(lfx=-80 * ph_, rfx=80 * ph_, lhx=-120 * ph_, rhx=110 * ph_); tr.keys[1][1].update(lfx=-80 * ph_, rfx=80 * ph_, lhx=-120 * ph_, rhx=110 * ph_)
         put(im, T, o, tr, cx=800, dy=(-abs(math.sin(T * 18)) * 30 if run else 0))
         if T > 0.85:
             tc = 0.85; n = int(round(685 * ease_out((T - tc) / 1.1)))
@@ -149,9 +151,9 @@ def S_night():
 def S_tv(mode="watch"):
     """watch: ve la tele feliz; flash: rayos y se marea"""
     if mode == "watch":
-        tr = MO.Track([(0.0, dict(MO.P["sit"], x=0), "neutral", ("fist", "fist"), {"look": (-1, 0)}), (q(0, 0.5), dict(MO.P["sit"], l_ua=60, l_fa=130), "proud", ("open", "fist"), {"look": (-1, 0)})])
+        tr = MO.Track([(0.0, MO.P["sit"], "neutral", ("fist", "fist"), {"look": (-1, 0)}), (q(0, 0.5), MO.P["sit_happy"], "proud", ("open", "fist"), {"look": (-1, 0)})])
     else:
-        tr = MO.Track([(0.0, MO.P["sit"], "shock", ("fist", "fist")), (q(0, 0.35), dict(MO.P["dizzy"], sit=1, y=40, l_th=14, l_sn=10, r_th=14, r_sn=10), "dizzy", ("open", "open"))])
+        tr = MO.Track([(0.0, MO.P["sit"], "shock", ("fist", "fist")), (q(0, 0.35), MO.P["sit_dizzy"], "dizzy", ("open", "open"))])
     def draw(T, d, o):
         im = ROOM_TV.copy(); calendar(im, 860, 640, "1997")
         crt(im, T, "anime", rays=(ease_out((T - at(q(0, 0.3), o)) / 0.5) if mode == "flash" and T > at(q(0, 0.3), o) else 0))
@@ -182,7 +184,7 @@ def S_building():
     return draw, lambda d, o: [(0, "boom", 0.7)] + [(0.15 + k * 0.08, "pop", 0.5) for k in range(9)] + [(0.1 + 1.3 * (k / 12) ** 1.5, "tick", 1) for k in range(12)]
 
 def S_hiatus():
-    tr = MO.Track([(0.0, MO.P["sit"], "confused", ("fist", "fist")), (q(0, 0.3), dict(MO.P["sit"], r_ua=40, r_fa=190), "confused", ("fist", "fist"))])
+    tr = MO.Track([(0.0, MO.P["sit"], "confused", ("fist", "fist")), (q(0, 0.3), MO.P["sit_wait"], "confused", ("fist", "fist"))])
     months = ["DIC", "ENE", "FEB", "MAR", "ABR"]
     def draw(T, d, o):
         im = ROOM_TV.copy(); crt(im, T, "off")
@@ -197,7 +199,7 @@ def S_sofa(beat):
     if beat == "relax":
         tr = MO.Track([(0.0, MO.P["sit_phone"], "smug", ("fist", "fist"), {"phone": "r"}), (q(0, 0.75), MO.P["sit_phone"], "neutral", ("fist", "fist"), {"phone": "r"})])
     else:
-        tr = MO.Track([(0.0, dict(MO.P["sit"], r_ua=125, r_fa=215), "confused", ("fist", "fist")), (q(1, 0.0), dict(MO.P["fall"], y=40), "shock", ("open", "open"))])
+        tr = MO.Track([(0.0, dict(MO.P["sit"], rhx=-10, rhy=-215, head=6), "confused", ("fist", "fist")), (q(1, 0.0), dict(MO.P["fall"], y=40), "shock", ("open", "open"))])
     def draw(T, d, o):
         im = cam(ROOM, T, z0=1.0); sofa(im)
         zoom = beat == "relax" and T > at(q(0, 0.6), o)
@@ -234,7 +236,7 @@ def S_app():
     return draw, lambda d, o: [(0, "whoosh2", 0.8), (at(q(0, 0.55), o), "pop2", 1.2)]
 
 def S_send():
-    tr = MO.Track([(0.0, MO.P["wave"], "wink", ("fist", "open")), (q(0, 0.45), dict(MO.P["point_r"], r_ua=130, r_fa=130), "proud", ("fist", "point"))])
+    tr = MO.Track([(0.0, MO.P["wave"], "wink", ("fist", "open")), (q(0, 0.45), MO.P["point_up_r"], "proud", ("fist", "point"))])
     def draw(T, d, o):
         im = rays("purple", T); hp = put(im, T, o, tr, cx=W / 2 - 80)
         t0 = at(q(0, 0.45), o)
@@ -255,7 +257,7 @@ def S_fin():
         paste_c(im, text_img("MANGA TRACKER", LG, 120, stroke=9, shadow=(0, 0, 0)), W / 2, 830, pop(T, 0.25))
         paste_c(im, text_img("GRATIS EN PLAY STORE", LG, 82, fill=YEL, stroke=8), W / 2, 950, pop(T, 0.5))
         paste_c(im, pill("ENLACE EN MI PERFIL", 56, path=MB), W / 2, 1075, pop(T, 0.75) * (1 + 0.05 * math.sin(T * 6)))
-        tr.keys[0][1]["r_fa"] = 170 + 25 * math.sin(T * 9)  # saluda
+        tr.keys[0][1]["rhx"] = 95 + 35 * math.sin(T * 9)  # saluda
         put(im, T, o, tr, cx=W / 2, sc=0.62, foot=1900)
         return im
     return draw, lambda d, o: [(0.1, "boom", 0.6)]
