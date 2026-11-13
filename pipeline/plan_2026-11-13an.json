@@ -1,0 +1,86 @@
+{
+ "descripcion": "Sustituir TODO lo programado desde 13/11 19:00 por el lote animado 2026-11-13an (pedido por Xavi el 13/11). En cada hueco: si ya hay un post, updateScheduledPost con este vídeo; si no, createScheduledPost. 22:00 sin Instagram. Tras cada post: estado.py marcar <id> <slot>. Al terminar, poner aplicado=true.",
+ "aplicado": false,
+ "plan": [
+  {
+   "slot": "2026-11-13T19:00",
+   "id": "2026-11-13an_dos_oscar_mismo_senor_chico"
+  },
+  {
+   "slot": "2026-11-13T22:00",
+   "id": "2026-11-13an_otaku_tu_casa_chica"
+  },
+  {
+   "slot": "2026-11-14T10:00",
+   "id": "2026-11-13an_franquicia_mas_rica_chico"
+  },
+  {
+   "slot": "2026-11-14T14:30",
+   "id": "2026-11-13an_manga_desde_1968_chica"
+  },
+  {
+   "slot": "2026-11-14T19:00",
+   "id": "2026-11-13an_revista_6_millones_chico"
+  },
+  {
+   "slot": "2026-11-14T22:00",
+   "id": "2026-11-13an_dormir_6_horas_chica"
+  },
+  {
+   "slot": "2026-11-15T10:00",
+   "id": "2026-11-13an_primer_anime_1917_chico"
+  },
+  {
+   "slot": "2026-11-15T14:30",
+   "id": "2026-11-13an_openings_90_segundos_chica"
+  },
+  {
+   "slot": "2026-11-15T19:00",
+   "id": "2026-11-13an_mangaka_20_paginas_chico"
+  },
+  {
+   "slot": "2026-11-15T22:00",
+   "id": "2026-11-13an_habito_66_dias_chica"
+  },
+  {
+   "slot": "2026-11-16T10:00",
+   "id": "2026-11-13an_dos_oscar_mismo_senor_chica"
+  },
+  {
+   "slot": "2026-11-16T14:30",
+   "id": "2026-11-13an_otaku_tu_casa_chico"
+  },
+  {
+   "slot": "2026-11-16T19:00",
+   "id": "2026-11-13an_franquicia_mas_rica_chica"
+  },
+  {
+   "slot": "2026-11-16T22:00",
+   "id": "2026-11-13an_manga_desde_1968_chico"
+  },
+  {
+   "slot": "2026-11-17T10:00",
+   "id": "2026-11-13an_revista_6_millones_chica"
+  },
+  {
+   "slot": "2026-11-17T14:30",
+   "id": "2026-11-13an_dormir_6_horas_chico"
+  },
+  {
+   "slot": "2026-11-17T19:00",
+   "id": "2026-11-13an_primer_anime_1917_chica"
+  },
+  {
+   "slot": "2026-11-17T22:00",
+   "id": "2026-11-13an_openings_90_segundos_chico"
+  },
+  {
+   "slot": "2026-11-18T10:00",
+   "id": "2026-11-13an_mangaka_20_paginas_chica"
+  },
+  {
+   "slot": "2026-11-18T14:30",
+   "id": "2026-11-13an_habito_66_dias_chico"
+  }
+ ]
+}

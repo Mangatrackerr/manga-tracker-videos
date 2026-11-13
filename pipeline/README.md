@@ -95,3 +95,12 @@ Basado en el trend de explainers satíricos animados ("¿Sabías que…?" con to
   `voz_viva.patch(M)`: frase a frase, 4 tomas y se elige la más expresiva; texto con ¡! ¿? y "…" para dar vida. El retoque de tono (WORLD) está DESACTIVADO porque sonaba robótico.
 - Música: `python3 pipeline/satira/lofi.py` genera lofi1..lofi20 (originales). Una distinta por vídeo, volumen 0.2.
 - Nada de destellos/parpadeos rápidos (vídeo del episodio de Porygon). Solo datos comprobados; nada de tragedias reales (p. ej. Kyoto Animation) como gancho.
+
+
+## Estilo TODO ANIMADO (aprobado por Xavi el 13/11/2026 — EL PREFERIDO)
+Igual que el satírico (gancho fuerte 0–5 s, voces Supertonic st5 / st0 / st4, lo-fi original, subtítulos arriba) pero el chico aparece de cuerpo entero
+y cada frase tiene su acción. Muñeco: `pipeline/satira/monigote2.py` (cabeza dibujada, pelo de una pieza, brazos/piernas de goma: las poses solo dicen dónde
+van manos y pies; poses en `MO.P`). Kit: `pipeline/satira/animado.py`: `A(fondo, [K(t, pose, expr, manos, phone=...)], props=[...], fx=[...])`.
+Fondos: room, street, stage, bedroom, blur, rays:<color>. Props: sofa, desk, bed, tv, calendar (seq), books (torre), clock, icon, big, pill, counter, stamp,
+rain (money/cards/confetti), phone_tiles, grid, timer. Fx: qmarks, stars, hearts, notes, zzz, bulb, sparkle. Finales: `A_app`, `A_send`, `A_fin`.
+Revisar siempre una tira de fotogramas de cada vídeo antes de darlo por bueno (textos que choquen con subtítulos, sellos ilegibles, escenas largas sin cambios).

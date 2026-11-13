@@ -4,10 +4,21 @@ Instrucciones para la tarea programada (se ejecuta cada día a las 08:00 hora de
 Objetivo: **publicidad de la app Manga Tracker**. Publicar 4 vídeos al día (Europe/Madrid), sin revisión manual de Xavi:
 **10:00, 14:30 y 19:00** en TikTok + Instagram (Reels) + YouTube (Shorts), y **22:00** solo en TikTok + YouTube (Shorts) — sin Instagram (decidido el 7/11/2026). Xavi confía en la edición: no le preguntes nada, decide tú.
 
+## ⚠️ PENDIENTE (prioridad máxima, antes de todo lo demás)
+Si `pipeline/plan_2026-11-13an.json` tiene `"aplicado": false`: Xavi pidió el 13/11 SUSTITUIR todo lo programado por el lote animado.
+Para cada hueco del plan que aún no haya pasado: consulta `getScheduledPosts`; si hay un post en ese hueco, `updateScheduledPost` con el vídeo del plan
+(media, text, títulos; 22:00 sin Instagram); si no hay, `createScheduledPost`. Después `estado.py marcar <id> <slot>` y, para el vídeo antiguo que
+estaba en ese hueco (lote 2026-11-12i), `estado.py desmarcar <id_antiguo> <slot>`. Al acabar, pon `"aplicado": true`, commit y push.
+Los huecos del plan que ya hayan pasado se saltan (sus vídeos se quedan sin marcar y saldrán después en la cola).
+
 ## 0. Preparación
 1. Clona el repo `Mangatrackerr/manga-tracker-videos` (si no está ya) y trabaja en él.
 2. Lee `pipeline/README.md`: estilo aprobado, voces, música, subtítulos, cierre.
-   **Desde el 13/11/2026 el estilo preferido por Xavi es el "satírico"** (`pipeline/satira/`, sección "Estilo satírico" del README):
+   **Desde el 13/11/2026 (tarde) el estilo preferido por Xavi es el "TODO ANIMADO"**: el mismo estilo satírico pero con el chico de cuerpo entero
+   (`pipeline/satira/monigote2.py`) actuando CADA frase. Kit de escenas: `pipeline/satira/animado.py` (función `A(fondo, poses, props, fx)` + `A_app`, `A_send`, `A_fin`).
+   Lote de referencia: `pipeline/satira/lote_2026-11-13an.py`. Temas: datos curiosos/industria/noticias de cualquier nicho con gancho fuerte en 0–5 s.
+   Registrar con estilo `animado` (máxima prioridad en la cola). Antes de esto el preferido era el "satírico", que queda de reserva:
+   **Estilo satírico (reserva)** (`pipeline/satira/`, sección "Estilo satírico" del README):
    explainer animado con personaje plano, GANCHO muy potente en los primeros 5 s (dato de industria, noticia reciente o curiosidad
    impactante, no hace falta que sea del nicho), sátira del amigo otaku y la app como solución. Lote de referencia: `pipeline/satira/lote_2026-11-12i.py`.
    Voces Supertonic 3 (`pipeline/satira/voz_viva.py`, SIN retoque de tono): chico 1 = `st5`; chica 1 = `st0`, chica 5 = `st4` (alternar).
@@ -22,7 +33,7 @@ Mira `grabaciones/` (ignora `.gitkeep`). Si hay vídeos:
 2. Si la grabación pesa mucho o va a 60 fps, recomprímela a 30 fps sin audio (CRF 25) antes de trabajar.
 3. Analiza la grabación: fotogramas a 1/s (y 2/s en zonas con acciones). Haz un mapa segundo a segundo de qué pantalla sale.
    Evita empezar escenas en pantallas de carga (rejillas vacías, spinners). Corta el final si sale la barra de notificaciones o el aviso de grabación.
-4. Escribe un lote nuevo en estilo **satírico** copiando `pipeline/satira/lote_2026-11-12i.py` (si hiciera falta, el estilo gancho: `pipeline/gancho/lote_2026-11-07g.py`) (cambia `LOTE`, `SRC_VIDEO`, los clips y los temas).
+4. Escribe un lote nuevo en estilo **todo animado** copiando `pipeline/satira/lote_2026-11-13an.py` (reserva: satírico `pipeline/satira/lote_2026-11-12i.py`; (si hiciera falta, el estilo gancho: `pipeline/gancho/lote_2026-11-07g.py`) (cambia `LOTE`, `SRC_VIDEO`, los clips y los temas).
    Entre 6 y 10 temas, cada uno: gancho (dato cierto o pregunta) → escalada → giro → demo en el móvil (con `callout` sobre el dato) → cierre `S_end`.
    18–30 s. Música distinta por tema (n1..n8). Usa SOLO funciones reales de la app (lista en el README) y SOLO datos ciertos o cuentas sencillas.
    No uses imágenes de anime ni logos de terceros (solo tipografía/gráficos + la grabación de la app).
@@ -32,7 +43,7 @@ Mira `grabaciones/` (ignora `.gitkeep`). Si hay vídeos:
    incluyendo siempre #parati y el gancho "Gratis en Play Store / link en mi perfil").
 6. Renderiza UNO A UNO (en paralelo da OOM): `python3 pipeline/gancho/lote_<lote>.py`. Genera versión chico y chica de cada tema en `videos/` (~1 min por vídeo).
 7. Revisa una tira de fotogramas de cada vídeo (sin pantallas de carga, subtítulos legibles, cierre con logo oscurecido).
-8. `python3 pipeline/estado.py registrar <lote> pipeline/textos_<lote>.json satira` (el tercer argumento marca el estilo; orden de la cola: satira > gancho > clasico).
+8. `python3 pipeline/estado.py registrar <lote> pipeline/textos_<lote>.json animado` (el tercer argumento marca el estilo; orden de la cola: animado > satira > gancho > clasico).
 9. Mueve la grabación a `procesadas/` (`git mv`). Borra los `.srt` de `videos/` si no hacen falta.
 10. Commit y push (mensaje en español).
 
@@ -40,7 +51,8 @@ Mira `grabaciones/` (ignora `.gitkeep`). Si hay vídeos:
 Mantén programados en Metricool los huecos de **hoy y mañana** (10:00, 14:30, 19:00 y 22:00 Europe/Madrid), saltando los que ya hayan pasado.
 1. Consulta `getScheduledPosts` (blogId `7829643`, zona `Europe/Madrid`) para hoy y mañana. No dupliques huecos ya ocupados.
 2. Para cada hueco libre, elige vídeo con `python3 pipeline/estado.py elegir <n>`.
-   Orden: nuevos "satira" → resubida de "satira" (los más antiguos) → gancho → clásicos (reserva).
+   Orden: nuevos "animado" → resubida de "animado" (los más antiguos) → satira → gancho → clásicos (reserva).
+   REGLA de Xavi: nunca pongas seguidas (ni el mismo día) la versión chico y la versión chica del MISMO tema: intercálalas con días de separación.
    (El 13/11/2026 se programaron del 13 al 17/11 los 20 vídeos del lote 2026-11-12i; a partir del 18/11 se resubirán.)
 3. Programa con `createScheduledPost` (blogId `7829643`), un post por hueco con las 3 redes (en el hueco de las **22:00** quita Instagram: `providers` solo tiktok + youtube y sin `instagramData`):
    - `media`: [url del vídeo en raw.githubusercontent.com]
