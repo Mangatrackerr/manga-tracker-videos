@@ -1,6 +1,6 @@
 {
  "descripcion": "Sustituir TODO lo programado desde 13/11 19:00 por el lote animado 2026-11-13an (pedido por Xavi el 13/11). En cada hueco: si ya hay un post, updateScheduledPost con este vídeo; si no, createScheduledPost. 22:00 sin Instagram. Tras cada post: estado.py marcar <id> <slot>. Al terminar, poner aplicado=true.",
- "aplicado": false,
+ "aplicado": true,
  "plan": [
   {
    "slot": "2026-11-13T19:00",
