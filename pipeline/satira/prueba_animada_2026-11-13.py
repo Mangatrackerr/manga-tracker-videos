@@ -12,7 +12,7 @@ voz_viva.patch(M)
 ES.VOICE_CHAIN = "highpass=f=75,equalizer=f=3000:t=q:w=1.4:g=1.2,acompressor=threshold=0.15:ratio=2:attack=10:release=150,"
 ES.MUSIC_VOL = 0.2
 OUT = os.path.abspath(os.path.join(HERE, "..", "..", "videos"))
-NAME = "2026-11-13b_685_ninos_animado_chico"
+NAME = "2026-11-13c_685_ninos_animado_chico"
 q = lambda k, f=0.0: (k, 0, f)
 FOOT = 1830  # altura de los pies del muñeco
 

@@ -22,8 +22,13 @@ def _hose(d, p0, p1, w, col, bend, out_sgn, length):
     nx, ny = -dy / dist, dx / dist                       # normal
     if nx * out_sgn < 0: nx, ny = -nx, -ny               # que el codo/rodilla salga hacia fuera
     c = ((p0[0] + p1[0]) / 2 + nx * length * 0.5 * k, (p0[1] + p1[1]) / 2 + ny * length * 0.5 * k)
-    pts = _bez(p0, c, p1)
-    d.line([(x * S, y * S) for x, y in pts], fill=col, width=int(w * S), joint="curve")
+    pts = _bez(p0, c, p1, 24)
+    # una sola forma rellena (sin costuras): bordes desplazados a ambos lados de la curva
+    L, Rr = [], []
+    for i, (x, y) in enumerate(pts):
+        a = pts[max(0, i - 1)]; b = pts[min(len(pts) - 1, i + 1)]; tx, ty = b[0] - a[0], b[1] - a[1]; n = math.hypot(tx, ty) or 1
+        ox, oy = -ty / n * w / 2, tx / n * w / 2; L.append(((x + ox) * S, (y + oy) * S)); Rr.append(((x - ox) * S, (y - oy) * S))
+    d.polygon(L + Rr[::-1], fill=col)
     for x, y in (pts[0], pts[-1]): d.ellipse(((x - w / 2) * S, (y - w / 2) * S, (x + w / 2) * S, (y + w / 2) * S), fill=col)
     return pts
 
@@ -35,12 +40,18 @@ def _head(d, cx, cy, expr, blink, look, sweat):
     R = 150
     _E(d, cx - R + 4, cy + 20, 26, 34, fill=SK); _E(d, cx + R - 4, cy + 20, 26, 34, fill=SK)          # orejas
     _E(d, cx, cy, R, R * 1.02, fill=SK)
-    # pelo: casquete + flequillo de picos
-    d.chord(((cx - R - 8) * S, (cy - R - 14) * S, (cx + R + 8) * S, (cy + R * 0.55) * S), 180, 360, fill=HAIR)
-    sp = [(cx - R - 8, cy - 30), (cx - R - 4, cy + 4)] + [(cx - R + 26 + i * 42, cy - 52 + (34 if i % 2 == 0 else 0)) for i in range(8)] + [(cx + R + 4, cy + 4), (cx + R + 8, cy - 30), (cx, cy - 80)]
-    d.polygon([(x * S, y * S) for x, y in sp], fill=HAIR)
-    d.polygon([(x * S, y * S) for x, y in [(cx - 30, cy - R - 4), (cx + 10, cy - R - 50), (cx + 30, cy - R + 6)]], fill=HAIR)
-    _L(d, [(cx - 80, cy - 110), (cx - 40, cy - 128)], 9, HAIR_L)
+    # pelo: UNA sola forma lisa (cúpula + flequillo ondulado), un mechón arriba y un brillo
+    dome = [(cx + (R + 12) * math.cos(a), cy - 14 + (R + 6) * math.sin(a)) for a in [math.pi * (1.0 + i / 40) for i in range(41)]]
+    fr = []
+    for i in range(41):
+        u = i / 40; x = cx + R + 12 - u * (2 * R + 24)
+        edge = abs(u - 0.5) * 2
+        y = cy - 50 + 20 * (0.5 - 0.5 * math.cos(2 * math.pi * u * 4)) + 52 * edge ** 3
+        fr.append((x, y))
+    d.polygon([(x * S, y * S) for x, y in dome + fr], fill=HAIR)
+    tuft = _bez((cx - 22, cy - R - 2), (cx - 4, cy - R - 70), (cx + 46, cy - R - 54), 14) + _bez((cx + 46, cy - R - 54), (cx + 14, cy - R - 30), (cx + 26, cy - R + 8), 14)
+    d.polygon([(x * S, y * S) for x, y in tuft], fill=HAIR)
+    _L(d, _arc(cx - 20, cy - 60, R - 40, R - 60, math.pi * 1.18, math.pi * 1.42), 10, HAIR_L)
     ey = cy + 18; ex = (cx - 56, cx + 56); lx, ly = look
     for i, x in enumerate(ex):
         if blink or (expr == "wink" and i == 0) or expr == "happy":
