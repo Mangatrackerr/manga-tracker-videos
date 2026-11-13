@@ -67,7 +67,7 @@ def _head(d, cx, cy, expr, blink, look, sweat):
         pr = 9 if expr == "shock" else 15
         px = x + lx * 9; py = ey + 4 + ly * 9
         _E(d, px, py, pr, pr + 2, fill=INK); _E(d, px + 5, py - 6, 4.5, 4.5, fill=WHITE)
-        if expr == "smug":  # párpado
+        if expr in ("smug", "tired"):  # párpado
             d.chord(((x - rx - 3) * S, (ey - ry - 3) * S, (x + rx + 3) * S, (ey + ry + 3) * S), 180, 360, fill=SK); _L(d, [(x - rx, ey), (x + rx, ey)], 6, INK)
     # cejas
     br = {"shock": (-62, -62), "confused": (-58, -44), "smug": (-46, -60), "cry": (-44, -44), "dizzy": (-50, -50)}.get(expr, (-52, -52))
@@ -80,6 +80,7 @@ def _head(d, cx, cy, expr, blink, look, sweat):
         d.chord(((cx - 42) * S, (my - 26) * S, (cx + 42) * S, (my + 28) * S), 0, 180, fill=INK); d.chord(((cx - 32) * S, (my - 18) * S, (cx + 32) * S, (my + 2) * S), 0, 180, fill=WHITE)
     elif expr in ("confused", "dizzy"): _L(d, [(cx - 36 + i * 6, my + 6 * math.sin(i * 1.1)) for i in range(13)], 7, INK)
     elif expr == "smug": _L(d, [(cx - 36, my + 6), (cx, my + 10), (cx + 34, my - 6)], 8, INK)
+    elif expr == "tired": _L(d, [(cx - 26, my + 6), (cx + 26, my + 6)], 8, INK); _E(d, cx - 56, cy + 60, 22, 7, fill=(190, 150, 170)); _E(d, cx + 56, cy + 60, 22, 7, fill=(190, 150, 170))
     elif expr == "cry": d.chord(((cx - 36) * S, (my - 4) * S, (cx + 36) * S, (my + 40) * S), 180, 360, fill=INK)
     else: _L(d, _arc(cx, my - 12, 32, 18, 0.3, math.pi - 0.3), 8, INK)
     if sweat > 0: _E(d, cx + R - 20, cy - 50, 14, 20, fill=(140, 200, 255))
@@ -165,6 +166,12 @@ P = {
  "dizzy": dict(lean=7, head=10, lhx=-80, lhy=180, rhx=80, rhy=190, lfx=-40, rfx=34),
  "sit_dizzy": dict(sit=1, y=60, lfx=-60, lfy=250, rfx=60, rfy=250, lhx=-90, lhy=150, rhx=90, rhy=160, lean=8, head=10),
  "fall": dict(lean=-30, head=-8, lhx=-140, lhy=-150, rhx=140, rhy=-170, lfx=-150, lfy=60, rfx=160, rfy=20, y=50),
+ "write": dict(sit=1, y=60, lfx=-60, lfy=250, rfx=60, rfy=250, lhx=40, lhy=95, rhx=-40, rhy=95),
+ "phone_stand": dict(rhx=-60, rhy=95, lhx=40, lhy=120),
+ "bow": dict(y=30, squash=0.5, head=0, lhx=70, lhy=150, rhx=-70, rhy=150),
+ "finger_up": dict(rhx=150, rhy=-150, lhx=-26, lhy=205),
+ "clap": dict(lhx=82, lhy=50, rhx=-82, rhy=50),
+ "sit_bed": dict(sit=1, y=60, lfx=-60, lfy=250, rfx=60, rfy=250, rhx=-60, rhy=95, lhx=40, lhy=120),
  "run": dict(lhx=-120, lhy=60, rhx=110, rhy=120, lfx=-80, lfy=240, rfx=70, rfy=200, lean=-6),
 }
 
