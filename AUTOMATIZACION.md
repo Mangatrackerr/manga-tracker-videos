@@ -76,4 +76,6 @@ Mantén programados en Metricool los huecos de **hoy y mañana a las 14:30 y 21:
 ## Historial
 - 13/11/2026: lote animado 2026-11-13an (10 temas × 2 voces).
 - 14/11/2026: se pasa a 2 vídeos/día sin repeticiones. Las versiones repetidas ya programadas del 14 al 18/11 se pusieron en borrador en Metricool.
-  Lote 2026-10-11 marcado como `descartado` (anuncio puro antiguo). Quedan 8 temas sin publicar del lote satírico 2026-11-12i.
+  Lote 2026-10-11 marcado como `descartado` (anuncio puro antiguo).
+- 14/11/2026: lote 2026-11-14p (10 temas, 5 contenido + 5 app, una voz por tema) aprobado por Xavi y programado del 17/11 21:00 al 22/11 14:30.
+  Quedan 8 temas sin publicar del lote satírico 2026-11-12i (todos "app"): úsalos intercalados con contenido nuevo cuando se cree el próximo lote.
