@@ -5,8 +5,11 @@ Uso:
   python3 pipeline/estado.py elegir <n>                         # muestra (JSON) los n siguientes vídeos a publicar
   python3 pipeline/estado.py marcar <id> <fecha_hora>           # registra que <id> se ha programado para <fecha_hora>
   python3 pipeline/estado.py desmarcar <id> <fecha_hora>        # deshace un marcar (si se sustituye un post)
+  python3 pipeline/estado.py quedan                          # nº de temas nuevos aún sin publicar
   python3 pipeline/estado.py resumen
-Reglas de elección:
+Reglas de elección (DESDE EL 14/11/2026, ver AUTOMATIZACION.md): sin resubidas, una sola voz por tema,
+solo temas nunca publicados. Las reglas antiguas de abajo ya no se aplican.
+Reglas antiguas:
   0. Prioridad por estilo (desde el 13/11/2026 tarde el preferido es "animado": muñeco de cuerpo entero, pipeline/satira/animado.py):
      nuevos animado > resubida animado > nuevos satira > resubida satira > gancho > clasico.
   1. Primero vídeos nunca programados (por orden de alta, alternando temas).
@@ -56,24 +59,27 @@ def registrar(lote, textos_path, estilo="clasico"):
 
 
 def elegir(n):
+    """Desde el 14/11/2026: SIN resubidas. Solo temas que nunca se han publicado (con ninguna voz).
+    De cada tema se usa UNA sola versión (la primera registrada). Si faltan, avisa para crear un lote nuevo."""
     e = load(); vs = e["videos"]
-    def pools(est):
-        n = [v for v in vs if not v["programado"] and v.get("estilo", "clasico") == est]
-        u = sorted([v for v in vs if v["programado"] and v.get("estilo", "clasico") == est], key=lambda v: (v["programado"][-1], len(v["programado"])))
-        return n, u
-    na, ua = pools("animado"); ns, us = pools("satira"); ng, ug = pools("gancho"); nc, uc = pools("clasico")
-    orden = (na, ua, ns, us, ng, ug, nc, uc)
+    usados = {v["tema"] for v in vs if v["programado"]}
+    prio = {"animado": 0, "satira": 1, "gancho": 2, "clasico": 3}
+    libres = [v for v in vs if v["tema"] not in usados and not v.get("descartado")]
+    libres.sort(key=lambda v: prio.get(v.get("estilo", "clasico"), 9))  # estable: respeta orden de alta
     out, temas = [], set()
-    for pool in orden:
-        for v in pool:
-            if len(out) >= n: break
-            if v["tema"] in temas or v in out: continue
-            out.append(v); temas.add(v["tema"])
-    # si aún faltan (pocos temas), rellenar sin la restricción de tema
-    for v in na + ua + ns + us + ng + ug + nc + uc:
+    for v in libres:
         if len(out) >= n: break
-        if v not in out: out.append(v)
+        if v["tema"] in temas: continue
+        out.append(v); temas.add(v["tema"])
+    if len(out) < n:
+        print(f"AVISO: solo hay {len(out)} temas nuevos sin publicar; hace falta crear un lote nuevo", file=sys.stderr)
     print(json.dumps(out, ensure_ascii=False, indent=1))
+
+
+def quedan():
+    e = load(); vs = e["videos"]
+    usados = {v["tema"] for v in vs if v["programado"]}
+    print(len({v["tema"] for v in vs if v["tema"] not in usados and not v.get("descartado")}))
 
 
 def desmarcar(vid, fecha):
@@ -105,4 +111,5 @@ if __name__ == "__main__":
      "desmarcar": lambda: desmarcar(sys.argv[2], sys.argv[3]),
      "elegir": lambda: elegir(int(sys.argv[2])),
      "marcar": lambda: marcar(sys.argv[2], sys.argv[3]),
+     "quedan": quedan,
      "resumen": resumen}[c]()
