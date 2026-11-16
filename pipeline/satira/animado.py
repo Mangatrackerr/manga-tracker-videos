@@ -133,6 +133,9 @@ def A(bgname, keys, props=(), fx=(), cx=W / 2, foot=1830, sc=1.0, run_until=None
             if T < t0 or (t1 is not None and T >= t1): continue
             u = T - t0; k = p["k"]
             if k == "sofa": sofa(im)
+            elif k == "draw":   # prop libre (16/11/2026): fn(im, T, u); front=True lo pinta delante del personaje
+                fn_ = lambda im_, p=p, u=u: p["fn"](im_, T, u)
+                late.append(fn_) if p.get("front") else fn_(im)
             elif k == "desk": desk(im)
             elif k == "bed": bed(im)
             elif k == "tv": crt(im, T, p.get("mode", "anime"), label=p.get("label"))
