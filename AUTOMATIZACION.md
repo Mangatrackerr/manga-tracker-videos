@@ -79,3 +79,5 @@ Mantén programados en Metricool los huecos de **hoy y mañana a las 14:30 y 21:
   Lote 2026-10-11 marcado como `descartado` (anuncio puro antiguo).
 - 14/11/2026: lote 2026-11-14p (10 temas, 5 contenido + 5 app, una voz por tema) aprobado por Xavi y programado del 17/11 21:00 al 22/11 14:30.
   Quedan 8 temas sin publicar del lote satírico 2026-11-12i (todos "app"): úsalos intercalados con contenido nuevo cuando se cree el próximo lote.
+- 16/11/2026: revisión semanal (`revisiones/2026-11-16.md`). Cambios para el próximo lote: mayoría "contenido" (6 + 3–4 app) porque lo que queda es todo "app";
+  pregunta final cerrada y de una palabra ("¿A o B?", "di un número") en pantalla los últimos 3–4 s; nada de "¿Lo sabías?"; algún ranking incompleto adrede ("falta el nº 1, dilo tú").
