@@ -13,12 +13,23 @@ Instrucciones para la tarea programada (se ejecuta cada día a las 07:54 hora de
    Termina siempre con una pregunta clara para comentarios. El texto del post también acaba con esa pregunta.
 5. **Gancho corto**: la primera frase ≤ 8 palabras, en pantalla en el segundo 0, sin introducción ni saludo. Duración total 15–25 s.
 6. **Revisión semanal (cada lunes)**: ver sección 4.
+7. **ESTILO VARIADO (decidido por Xavi el 16/11/2026 — obligatorio desde ahora)**: en CADA vídeo cambian el **personaje**, el **escenario** y la **animación**.
+   Nunca dos vídeos seguidos con el mismo personaje ni el mismo escenario. Se acabó el chico de la sudadera morada en la habitación para todo.
+   - Personaje: `MO.set_look(**LOOKS[nombre])` (`pipeline/satira/looks.py`). Hay 5 (kenji, yuna, aiko, taro, mika); crea looks nuevos en cada lote
+     combinando `hair_style` (short, spiky, curly, long, bob, ponytail, buns), `top` (hoodie, tee, tank, jacket, uniform, chef, sweater),
+     `bottom` (jeans, skirt, shorts, track), colores de piel/pelo/ropa, `glasses`, `hat` (cap, bandana, headband, chef), `apron`, `lashes`. La voz debe cuadrar con el personaje (chico st5; chica st0/st4).
+   - Escenario: `pipeline/satira/escenarios.py` (`EC.instalar()`; ramen, cocina, cine, cine_hall, biblio, biblio_mesa, montana, cielo, estadio, podio),
+     cada uno con cámara a la deriva y animación ambiental propia. Dibuja escenarios NUEVOS en cada lote (función base + función `_amb`, añadir a `SCEN`):
+     un escenario principal + una variante por vídeo, relacionados con el tema.
+   - Animación: props dibujados propios del tema con `dict(k="draw", fn=..., front=bool)` (en `animado.A`), entradas corriendo (`run_until`/`xmove`), etc.
+   - Cierre: `A_preg2(pregunta, escenario)` = la pregunta sobre el escenario del propio vídeo difuminado (no el fondo de rayos de siempre).
+   - Lote de referencia: `pipeline/satira/lote_2026-11-16v.py`.
 
 ## 0. Preparación
 1. Clona el repo `Mangatrackerr/manga-tracker-videos` (si no está ya) y trabaja en él.
 2. Lee `pipeline/README.md`: estilo, voces, música, subtítulos, cierre.
-   Estilo preferido: **"TODO ANIMADO"** (chico de cuerpo entero `pipeline/satira/monigote2.py`, kit `pipeline/satira/animado.py`: `A(...)`, `A_app`, `A_send`, `A_fin`).
-   Lote de referencia: `pipeline/satira/lote_2026-11-13an.py`. Voces Supertonic 3 (`pipeline/satira/voz_viva.py`, sin retoque de tono).
+   Estilo preferido: **"TODO ANIMADO" VARIADO** (regla 7: personaje, escenario y animación distintos en cada vídeo; referencia `pipeline/satira/lote_2026-11-16v.py`). Base técnica: chico de cuerpo entero `pipeline/satira/monigote2.py`, kit `pipeline/satira/animado.py`: `A(...)`, `A_app`, `A_send`, `A_fin`).
+   Lote de referencia: `pipeline/satira/lote_2026-11-16v.py` (el antiguo 13an ya no sirve de modelo visual). Voces Supertonic 3 (`pipeline/satira/voz_viva.py`, sin retoque de tono).
    Música lo-fi original (`pipeline/satira/lofi.py`), una distinta por vídeo, `MUSIC_VOL = 0.2`.
    Para los vídeos de "contenido" (sin app) no uses `A_app` ni `A_send` con la app; cierra con `A_fin` sin el texto "Gratis en Play Store" (o sin `A_fin`).
 
@@ -28,7 +39,7 @@ Ejecuta `python3 pipeline/estado.py quedan` (nº de temas nuevos sin publicar). 
 1. Monta el entorno (sección "Montaje del entorno" del README). Fuentes: `pipeline/*.ttf` → `pipeline/fonts/`. Logo: `pipeline/logo.png`.
 2. Grabación nueva: si pesa mucho o va a 60 fps, recomprímela a 30 fps sin audio (CRF 25). Analízala (fotogramas a 1/s) y haz un mapa segundo a segundo.
    Evita pantallas de carga y el final con la barra de notificaciones.
-3. Copia `pipeline/satira/lote_2026-11-13an.py` a `pipeline/satira/lote_<fecha>X.py` (cambia `LOTE`, `SRC_VIDEO`, temas).
+3. Copia `pipeline/satira/lote_2026-11-16v.py` a `pipeline/satira/lote_<fecha>X.py` (cambia `LOTE`, `SRC_VIDEO`, temas).
    **8–10 temas, la mitad "contenido" y la mitad "app"**, cumpliendo las reglas 3–5. Cada tema con UNA voz: genera solo esa versión
    (adapta el `__main__` para que cada tema tenga su voz fija y el archivo salga como `videos/<lote>_<tema>_<chico|chica>.mp4`).
    Usa SOLO funciones reales de la app y SOLO datos ciertos y comprobables. Nada de imágenes de anime ni logos de terceros. Nada de destellos rápidos.
@@ -81,3 +92,6 @@ Mantén programados en Metricool los huecos de **hoy y mañana a las 14:30 y 21:
   Quedan 8 temas sin publicar del lote satírico 2026-11-12i (todos "app"): úsalos intercalados con contenido nuevo cuando se cree el próximo lote.
 - 16/11/2026: revisión semanal (`revisiones/2026-11-16.md`). Cambios para el próximo lote: mayoría "contenido" (6 + 3–4 app) porque lo que queda es todo "app";
   pregunta final cerrada y de una palabra ("¿A o B?", "di un número") en pantalla los últimos 3–4 s; nada de "¿Lo sabías?"; algún ranking incompleto adrede ("falta el nº 1, dilo tú").
+- 16/11/2026: lote de prueba 2026-11-16v (5 temas de contenido, cada uno con personaje, escenario y animación distintos). A Xavi le gustan: es el estilo
+  obligatorio desde ahora (regla 7). Programado intercalado con lo que había: los nuevos a las 14:30 del 17 al 21/11 y los antiguos corridos a las 21:00
+  (y del 22 al 24/11). Programación cubierta hasta el 24/11 21:00.

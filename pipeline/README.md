@@ -104,3 +104,13 @@ van manos y pies; poses en `MO.P`). Kit: `pipeline/satira/animado.py`: `A(fondo,
 Fondos: room, street, stage, bedroom, blur, rays:<color>. Props: sofa, desk, bed, tv, calendar (seq), books (torre), clock, icon, big, pill, counter, stamp,
 rain (money/cards/confetti), phone_tiles, grid, timer. Fx: qmarks, stars, hearts, notes, zzz, bulb, sparkle. Finales: `A_app`, `A_send`, `A_fin`.
 Revisar siempre una tira de fotogramas de cada vídeo antes de darlo por bueno (textos que choquen con subtítulos, sellos ilegibles, escenas largas sin cambios).
+
+
+## Estilo VARIADO (aprobado por Xavi el 16/11/2026 — EL PREFERIDO, obligatorio)
+Igual que "todo animado" pero en cada vídeo cambian personaje, escenario y animación. Referencia: `pipeline/satira/lote_2026-11-16v.py`.
+- Personajes: `pipeline/satira/looks.py` + `MO.set_look(**look)` (pelo, ropa, piel, gafas, gorra/pañuelo, delantal, pestañas). `MO.set_look()` sin argumentos = el chico de siempre.
+- Escenarios: `pipeline/satira/escenarios.py` (`EC.instalar()` antes de crear escenas; nombre + ":blur" = versión difuminada para el cierre).
+  Cada escenario = imagen base (W+120 x H+120) + animación ambiental; la cámara se mueve sola. Las capas semitransparentes se pintan en una capa aparte (ya lo hace `bg`).
+- Props libres: `dict(k="draw", fn=lambda im, T, u: ..., front=True|False)`.
+- Cierre sin app: `A_preg2(pregunta, escenario, sub=...)`.
+- Entorno extra: además de lo de siempre, `make_video.py` necesita el modelo Kokoro en `pipeline/kokoro/` aunque no se use (se carga al importar).
