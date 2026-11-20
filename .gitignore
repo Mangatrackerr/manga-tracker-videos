@@ -5,3 +5,4 @@ pipeline/build/
 pipeline/in.mp4
 __pycache__/
 pipeline/supertonic/
+pipeline/whisper/

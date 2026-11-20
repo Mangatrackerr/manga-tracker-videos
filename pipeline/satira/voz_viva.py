@@ -21,7 +21,9 @@ def _gen(text, sid, speed):
     g = so.GenerationConfig(); g.sid = sid; g.speed = speed; g.extra = {"lang": "es"}
     a = _engine().generate(text, g); x = np.array(a.samples, dtype=np.float64)
     thr = 0.02 * np.abs(x).max(); idx = np.where(np.abs(x) > thr)[0]
-    return x[max(0, idx[0] - 600):idx[-1] + 1800], a.sample_rate
+    y = x[max(0, idx[0] - 600):idx[-1] + 3600].copy(); sr = a.sample_rate
+    fi, fo = int(0.006 * sr), int(0.03 * sr); y[:fi] *= np.linspace(0, 1, fi); y[-fo:] *= np.linspace(1, 0, fo)   # sin chasquidos ni finales cortados
+    return y, sr
 
 def _f0(x, sr):
     f0, t = pw.dio(x, sr, frame_period=5.0); return pw.stonemask(x, f0, t, sr), t
@@ -53,7 +55,8 @@ def _intonate(x, sr, kind):
 
 SPEED = {"!": 1.13, "?": 1.06, "…": 0.98, ".": 1.05}
 PAUSE = {"!": 0.16, "?": 0.2, "…": 0.42, ".": 0.24}
-RETOQUE = False  # el retoque WORLD daba un toque robótico (feedback de Xavi 12/11): desactivado
+RETOQUE = False
+RND = __import__("random").Random(7); RND_NP = np.random.default_rng(7); ROOM_TONE = 0.0012  # el retoque WORLD daba un toque robótico (feedback de Xavi 12/11): desactivado
 def tts_viva(text, voice, fn, takes=4):
     sid = int(voice[2:])
     parts = [p for p in re.split(r"(?<=[.!?…])\s+", text.strip()) if p]
@@ -61,15 +64,18 @@ def tts_viva(text, voice, fn, takes=4):
     for i, p in enumerate(parts):
         kind = p[-1] if p[-1] in "!?…" else "."
         txt = p.replace("…", "...")
-        best, bs = None, -1e9
+        cands = []
         for k in range(takes):
             x, sr = _gen(txt, sid, SPEED[kind] * (1 + 0.03 * (k - 1.5)))
-            sc = _score(x, sr, kind)
-            if sc > bs: best, bs = x, sc
+            cands.append((x, _score(x, sr, kind)))
+        # 20/11: la toma más viva, pero castigando las de duración rara (suelen ser tomas con palabras comidas o alargadas)
+        md = np.median([len(c[0]) for c in cands])
+        best = max(cands, key=lambda c: c[1] - 3.0 * abs(len(c[0]) / md - 1))[0]
         y = _intonate(best, sr, kind) if RETOQUE else best
         out.append(y)
-        if i < len(parts) - 1: out.append(np.zeros(int(PAUSE[kind] * sr)))
+        if i < len(parts) - 1: out.append(np.zeros(int(PAUSE[kind] * sr * RND.uniform(0.85, 1.2))))   # pausas no idénticas, como al hablar
     a = np.concatenate(out); a = a / (np.abs(a).max() + 1e-9) * 0.9
+    a = a + ROOM_TONE * np.convolve(RND_NP.standard_normal(len(a)), np.ones(8) / 8, 'same')   # 'aire' de habitación: sin silencios digitales entre frases
     sf.write(fn, a, sr); return len(a) / sr
 
 def patch(M):

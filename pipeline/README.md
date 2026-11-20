@@ -114,3 +114,16 @@ Igual que "todo animado" pero en cada vídeo cambian personaje, escenario y anim
 - Props libres: `dict(k="draw", fn=lambda im, T, u: ..., front=True|False)`.
 - Cierre sin app: `A_preg2(pregunta, escenario, sub=...)`.
 - Entorno extra: además de lo de siempre, `make_video.py` necesita el modelo Kokoro en `pipeline/kokoro/` aunque no se use (se carga al importar).
+
+
+## Lote 2026-11-20x: retención + voz más humana (20/11/2026 — referencia actual)
+- `pipeline/satira/escenarios2.py`: 20 escenarios nuevos (carretera/isekai, playa/playa_tarde, metro/anden, prado/prado_noche, cafe/cafe_mesa,
+  barco/barco_noche, azotea/callejon, gala/gala_escenario, observatorio/espacio, karaoke/karaoke_esc). `EC2.instalar2()` los registra.
+  Hoja de contacto: `python3 pipeline/satira/escenarios2.py hoja.jpg`.
+- `looks.py`: 10 personajes nuevos (ren, leilani, sora, kaito, nora, hiro, jin, mei, luna, dai).
+- `lote_2026-11-20x.py`: `punch(escena)` = golpe de cámara al empezar; `A_app2(a, b, escenario, callout)` = móvil con la app sobre el escenario del vídeo;
+  `A_preg2(..., logo=True)` = pregunta final con logo pequeño en los vídeos con app; props nuevos (camión, portal, bola de energía, corona, cazamariposas,
+  libro que suelta páginas, móvil con scroll vertical, copa, podio top 3...).
+- Voz (`voz_viva.py`): se descartan las tomas de duración rara, los finales ya no se cortan, pausas ligeramente distintas entre frases y "aire" de fondo.
+- Revisión obligatoria: `python3 pipeline/satira/revisar_voz.py videos/<vídeo>.mp4` (Whisper) + tira de fotogramas a 2/s.
+- La fuente Luckiest Guy no tiene "≈": escribe "CASI" en su lugar.

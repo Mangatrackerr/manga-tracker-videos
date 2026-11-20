@@ -23,7 +23,14 @@ Instrucciones para la tarea programada (se ejecuta cada día a las 07:54 hora de
      un escenario principal + una variante por vídeo, relacionados con el tema.
    - Animación: props dibujados propios del tema con `dict(k="draw", fn=..., front=bool)` (en `animado.A`), entradas corriendo (`run_until`/`xmove`), etc.
    - Cierre: `A_preg2(pregunta, escenario)` = la pregunta sobre el escenario del propio vídeo difuminado (no el fondo de rayos de siempre).
-   - Lote de referencia: `pipeline/satira/lote_2026-11-16v.py`.
+   - Lote de referencia: `pipeline/satira/lote_2026-11-20x.py` (el más completo: 10 personajes, 20 escenarios de `escenarios2.py`, gancho con `punch`).
+8. **RETENCIÓN (pedido por Xavi el 20/11/2026)**: en el fotograma 0 ya tiene que estar pasando algo llamativo (un camión que cruza, un tren, una bola de energía,
+   un contador disparado, un libro que explota en páginas...) y la primera escena entra con `punch(...)` (golpe de cámara). El texto grande del gancho
+   aparece ya en el segundo 0 (`t=-0.12`). Temática distinta en cada vídeo (no repetir temas de lotes anteriores).
+9. **VOZ HUMANA (20/11/2026)**: escribe la línea de voz con pausas naturales (comas y "…" donde una persona respiraría), números en letra y nombres
+   extranjeros con su pronunciación en `M.SUBS` (p. ej. Kamehameha→"Kamejaméja", Ghibli→"Guíbli", hawaiano→"jawaiano").
+   Comprueba SIEMPRE la voz transcribiendo el audio final con Whisper (modelo `sherpa-onnx-whisper-small` de los releases de k2-fsa en GitHub,
+   Hugging Face está bloqueado) y corrige lo que se entienda mal antes de publicar.
 
 ## 0. Preparación
 1. Clona el repo `Mangatrackerr/manga-tracker-videos` (si no está ya) y trabaja en él.
@@ -95,3 +102,8 @@ Mantén programados en Metricool los huecos de **hoy y mañana a las 14:30 y 21:
 - 16/11/2026: lote de prueba 2026-11-16v (5 temas de contenido, cada uno con personaje, escenario y animación distintos). A Xavi le gustan: es el estilo
   obligatorio desde ahora (regla 7). Programado intercalado con lo que había: los nuevos a las 14:30 del 17 al 21/11 y los antiguos corridos a las 21:00
   (y del 22 al 24/11). Programación cubierta hasta el 24/11 21:00.
+- 20/11/2026: a petición de Xavi se vació la cola: los 8 vídeos antiguos programados (lote 14p, mismo personaje y escenario) pasaron a borrador en Metricool
+  y se marcaron `descartado`, igual que los 8 sin publicar del lote satírico 12i. Se mantuvieron los 2 del lote variado 16v (20/11 y 21/11 a las 14:30).
+  Lote nuevo 2026-11-20x: 10 temas (4 contenido + 6 app), cada uno con personaje, escenario, temática y animación distintos, gancho visual en el fotograma 0,
+  voz mejorada (`voz_viva.py`: tomas de duración rara descartadas, finales sin cortar, pausas no idénticas, aire de habitación) y revisada con Whisper.
+  Programado del 20/11 21:00 al 25/11 21:00.
