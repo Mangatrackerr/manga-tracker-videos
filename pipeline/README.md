@@ -127,3 +127,12 @@ Igual que "todo animado" pero en cada vídeo cambian personaje, escenario y anim
 - Voz (`voz_viva.py`): se descartan las tomas de duración rara, los finales ya no se cortan, pausas ligeramente distintas entre frases y "aire" de fondo.
 - Revisión obligatoria: `python3 pipeline/satira/revisar_voz.py videos/<vídeo>.mp4` (Whisper) + tira de fotogramas a 2/s.
 - La fuente Luckiest Guy no tiene "≈": escribe "CASI" en su lugar.
+
+
+## Lote 2026-11-21y (21/11/2026)
+- `pipeline/satira/escenarios3.py`: 8 escenarios nuevos con variante (futuro/futuro_noche, campo/campo_noche, despacho/niebla, huerto/huerto_noche,
+  lavanderia/lavanderia_noche, pizzeria/pizzeria_noche, pabellon/pabellon_vacio, sakura/sakura_noche). `EC3.instalar3()`; hoja: `python3 pipeline/satira/escenarios3.py hoja.jpg`.
+- `looks.py`: 8 personajes nuevos (momo, hana, rio, yui, takumi, iris, kuro, nami). Ojo: `hat="cap"` con coleta tapa los ojos; usa bandana/headband.
+- `lote_2026-11-21y.py`: props nuevos (ropa que sale volando, mancha de pintura que cambia de color, ratón robot, balón chutado al horizonte, portería que se aleja,
+  burbujas de chat, pergamino-lista, remolino de pétalos, lupa, manzanas que caen, cuaderno negro, remate de voleibol con ondas, marcador).
+

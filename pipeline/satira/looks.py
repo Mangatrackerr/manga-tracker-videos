@@ -61,4 +61,37 @@ LOOKS = {
  "dai": dict(skin=(226, 176, 136), hair=(40, 170, 180), hair_l=(110, 215, 220), hair_style="short", hat="headband", hat_c=(230, 40, 60),
              top="tank", top_c=(255, 210, 50), top_d=(220, 170, 20), top_l=(255, 230, 120), inner=(255, 210, 50),
              bottom="jeans", bottom_c=(34, 34, 44), shoe=(250, 250, 250), sole=(230, 40, 60), blush=(240, 140, 110)),
+ # ---- lote 2026-11-21y (uno por vídeo) ----
+ # chica de la lavandería: moños dobles verde menta, sudadera lila con capucha, pantalón de chándal gris
+ "momo": dict(skin=(246, 212, 186), hair=(110, 200, 170), hair_l=(160, 230, 205), hair_style="buns", lashes=True, iris=(50, 110, 90),
+              top="hoodie", top_c=(190, 160, 230), top_d=(160, 128, 205), top_l=(215, 190, 245), inner=(250, 250, 255),
+              bottom="track", bottom_c=(130, 130, 145), stripe_b=(250, 250, 250), shoe=(250, 250, 250), sole=(150, 150, 170), blush=(255, 160, 170)),
+ # chica del futuro: media melena azul eléctrico, chaqueta blanca con interior amarillo, falda azul marino
+ "hana": dict(skin=(250, 224, 202), hair=(50, 120, 230), hair_l=(110, 170, 250), hair_style="bob", lashes=True, iris=(40, 80, 170),
+              top="jacket", top_c=(245, 246, 250), top_d=(210, 214, 225), top_l=(255, 255, 255), inner=(255, 210, 60),
+              bottom="skirt", bottom_c=(30, 50, 110), socks=(255, 255, 255), shoe=(230, 60, 60), sole=(150, 30, 30), blush=(255, 160, 170)),
+ # futbolista: pelo de punta negro, cinta blanca, camiseta blanca con raya azul, pantalón corto azul
+ "rio": dict(skin=(214, 166, 126), hair=(28, 22, 20), hair_l=(70, 60, 56), hair_style="spiky", hat="headband", hat_c=(250, 250, 250),
+             top="tee", top_c=(250, 250, 252), top_d=(215, 218, 228), top_l=(255, 255, 255), stripe=(40, 90, 220),
+             bottom="shorts", bottom_c=(40, 90, 220), socks=(250, 250, 250), shoe=(30, 30, 36), sole=(250, 250, 250), blush=(220, 130, 110)),
+ # chica de la pizzería: coleta pelirroja, pañuelo rojo, camiseta verde con raya blanca, vaqueros
+ "yui": dict(skin=(252, 222, 200), hair=(200, 80, 40), hair_l=(240, 130, 80), hair_style="ponytail", lashes=True, iris=(60, 110, 60), hat="bandana", hat_c=(210, 40, 40),
+             top="tee", top_c=(40, 150, 80), top_d=(28, 116, 60), top_l=(80, 185, 115), stripe=(250, 250, 250),
+             bottom="jeans", bottom_c=(60, 80, 130), shoe=(250, 250, 250), sole=(210, 40, 40), blush=(250, 150, 140)),
+ # chico del parque de cerezos: pelo rizado castaño claro, gafas redondas, jersey rosa palo, pantalón beige
+ "takumi": dict(skin=(244, 208, 176), hair=(150, 100, 60), hair_l=(200, 150, 100), hair_style="curly", glasses=(70, 50, 40),
+                top="sweater", top_c=(240, 170, 190), top_d=(215, 140, 162), top_l=(250, 200, 215), inner=(250, 250, 250),
+                bottom="jeans", bottom_c=(200, 180, 140), shoe=(110, 70, 50), sole=(60, 40, 26)),
+ # detective: pelo largo castaño oscuro, gafas, gabardina beige, falda marrón
+ "iris": dict(skin=(240, 204, 176), hair=(70, 40, 30), hair_l=(120, 80, 60), hair_style="long", lashes=True, glasses=(30, 30, 30), iris=(90, 60, 40),
+              top="jacket", top_c=(200, 170, 120), top_d=(170, 140, 96), top_l=(225, 200, 150), inner=(250, 250, 250),
+              bottom="skirt", bottom_c=(100, 64, 44), socks=(40, 36, 40), shoe=(60, 40, 30), sole=(30, 20, 14)),
+ # chico gótico del huerto: pelo de punta blanco, chaqueta negra con interior rojo, vaqueros negros
+ "kuro": dict(skin=(232, 214, 210), hair=(235, 235, 240), hair_l=(255, 255, 255), hair_style="spiky", iris=(170, 40, 60),
+              top="jacket", top_c=(30, 28, 36), top_d=(18, 16, 22), top_l=(64, 60, 74), inner=(190, 30, 50),
+              bottom="jeans", bottom_c=(26, 26, 32), shoe=(60, 20, 30), sole=(20, 10, 14)),
+ # jugadora de voleibol: coleta negra, cinta naranja, camiseta de tirantes naranja con raya negra, pantalón corto negro
+ "nami": dict(skin=(226, 180, 140), hair=(26, 22, 24), hair_l=(70, 62, 66), hair_style="ponytail", lashes=True, iris=(80, 50, 30), hat="headband", hat_c=(255, 140, 30),
+              top="tank", top_c=(255, 140, 30), top_d=(225, 110, 20), top_l=(255, 175, 90), stripe=(30, 30, 36), inner=(255, 140, 30),
+              bottom="shorts", bottom_c=(30, 30, 36), socks=(250, 250, 250), shoe=(250, 250, 250), sole=(255, 140, 30), blush=(240, 140, 110)),
 }

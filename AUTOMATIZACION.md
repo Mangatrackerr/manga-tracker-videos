@@ -107,3 +107,8 @@ Mantén programados en Metricool los huecos de **hoy y mañana a las 14:30 y 21:
   Lote nuevo 2026-11-20x: 10 temas (4 contenido + 6 app), cada uno con personaje, escenario, temática y animación distintos, gancho visual en el fotograma 0,
   voz mejorada (`voz_viva.py`: tomas de duración rara descartadas, finales sin cortar, pausas no idénticas, aire de habitación) y revisada con Whisper.
   Programado del 20/11 21:00 al 25/11 21:00.
+- 21/11/2026 (tarea automática): lote 2026-11-21y, 8 temas (4 contenido + 4 app) ya ordenados para la alternancia (26/11 14:30 app → 29/11 21:00 app).
+  Personajes nuevos en `looks.py` (momo, hana, rio, yui, takumi, iris, kuro, nami) y 8 escenarios nuevos + variante en `escenarios3.py`
+  (futuro, campo, despacho/niebla, huerto, lavanderia, pizzeria, pabellon, sakura; `EC3.instalar3()`). Nota: `estado.py registrar` con estilo animado
+  reordena los temas de una sola voz; tras registrar se dejó la cola en el orden del JSON de textos.
+
