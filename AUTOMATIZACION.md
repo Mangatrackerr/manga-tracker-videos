@@ -111,4 +111,7 @@ Mantén programados en Metricool los huecos de **hoy y mañana a las 14:30 y 21:
   Personajes nuevos en `looks.py` (momo, hana, rio, yui, takumi, iris, kuro, nami) y 8 escenarios nuevos + variante en `escenarios3.py`
   (futuro, campo, despacho/niebla, huerto, lavanderia, pizzeria, pabellon, sakura; `EC3.instalar3()`). Nota: `estado.py registrar` con estilo animado
   reordena los temas de una sola voz; tras registrar se dejó la cola en el orden del JSON de textos.
+- 23/11/2026: revisión semanal (`revisiones/2026-11-23.md`). TikTok 458 visitas/vídeo (−44 %), Instagram 787 (+34 %). Cambios para el próximo lote:
+  preguntas finales tipo "dilo tú" / "completa el top" / "di uno peor" (son las que traen comentarios), vídeos de "contenido" con opinión discutible
+  (no solo dato curioso + "elige uno"), mantener gancho en el fotograma 0. Huecos 23–24/11 ya estaban cubiertos; quedan 8 temas (lote 21y) sin programar.
 
