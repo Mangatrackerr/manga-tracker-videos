@@ -115,3 +115,9 @@ Mantén programados en Metricool los huecos de **hoy y mañana a las 14:30 y 21:
   preguntas finales tipo "dilo tú" / "completa el top" / "di uno peor" (son las que traen comentarios), vídeos de "contenido" con opinión discutible
   (no solo dato curioso + "elige uno"), mantener gancho en el fotograma 0. Huecos 23–24/11 ya estaban cubiertos; quedan 8 temas (lote 21y) sin programar.
 
+- 27/11/2026 (tarea automática): lote 2026-11-27z, 8 temas (4 contenido + 4 app) ya ordenados para la alternancia (30/11 14:30 app → 03/12 21:00 app).
+  Preguntas finales tipo "dilo tú" / "di un número" (revisión del 23/11) y un contenido abiertamente polémico ("tu anime favorito está sobrevalorado").
+  Personajes nuevos en `looks.py` (goro, rina, kenta, chiho, aya, sho, kana, yuto) y 8 escenarios nuevos + variante en `escenarios4.py`
+  (aldea, tribunal, planeta/planeta_rojo, desvan, kiosco, nevada/nevada_alba, gimnasio, aula/aula_tarde; `EC4.instalar4()`).
+  Voz: "Ash" a secas lo entiende Whisper como "hasta" → usar "Ash Kétchum"; "One Punch Man" → "El manga Wan Panch Man" (sin contexto sale "Juan").
+  Programados 28/11 14:30 (shojo_chicos, app) y 21:00 (conan_nombre, contenido).

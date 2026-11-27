@@ -94,4 +94,37 @@ LOOKS = {
  "nami": dict(skin=(226, 180, 140), hair=(26, 22, 24), hair_l=(70, 62, 66), hair_style="ponytail", lashes=True, iris=(80, 50, 30), hat="headband", hat_c=(255, 140, 30),
               top="tank", top_c=(255, 140, 30), top_d=(225, 110, 20), top_l=(255, 175, 90), stripe=(30, 30, 36), inner=(255, 140, 30),
               bottom="shorts", bottom_c=(30, 30, 36), socks=(250, 250, 250), shoe=(250, 250, 250), sole=(255, 140, 30), blush=(240, 140, 110)),
+ # ---- lote 2026-11-27z (uno por vídeo) ----
+ # chico de la aldea: pelo corto negro, cinta verde, chaqueta verde oliva, chándal gris
+ "goro": dict(skin=(226, 182, 146), hair=(24, 20, 22), hair_l=(66, 60, 64), hair_style="short", hat="headband", hat_c=(60, 140, 80),
+              top="jacket", top_c=(100, 120, 70), top_d=(76, 94, 50), top_l=(130, 150, 96), inner=(40, 40, 50),
+              bottom="track", bottom_c=(110, 110, 124), stripe_b=(40, 40, 50), shoe=(40, 40, 46), sole=(20, 20, 24)),
+ # jueza: media melena granate, chaqueta negra, camisa blanca, falda gris
+ "rina": dict(skin=(244, 210, 184), hair=(130, 30, 50), hair_l=(180, 70, 90), hair_style="bob", lashes=True, iris=(90, 40, 50),
+              top="jacket", top_c=(30, 28, 36), top_d=(18, 16, 22), top_l=(64, 60, 74), inner=(250, 250, 255),
+              bottom="skirt", bottom_c=(110, 110, 124), socks=(30, 30, 36), shoe=(30, 26, 30), sole=(14, 12, 14)),
+ # chico del planeta: pelo rizado castaño oscuro, sudadera roja, chándal negro
+ "kenta": dict(skin=(200, 150, 112), hair=(70, 44, 30), hair_l=(120, 84, 60), hair_style="curly",
+               top="hoodie", top_c=(210, 50, 56), top_d=(170, 34, 40), top_l=(240, 96, 100), inner=(250, 250, 250),
+               bottom="track", bottom_c=(30, 30, 38), stripe_b=(250, 250, 250), shoe=(250, 250, 250), sole=(210, 50, 56), blush=(220, 120, 100)),
+ # chica del desván: coleta castaña clara, jersey mostaza, vaqueros
+ "chiho": dict(skin=(250, 220, 196), hair=(170, 120, 70), hair_l=(210, 165, 110), hair_style="ponytail", lashes=True, iris=(90, 70, 40),
+               top="sweater", top_c=(230, 180, 50), top_d=(200, 150, 30), top_l=(245, 205, 100), inner=(250, 250, 250),
+               bottom="jeans", bottom_c=(70, 90, 140), shoe=(200, 70, 60), sole=(120, 40, 30), blush=(255, 160, 150)),
+ # chica del kiosco: moños negros, chaqueta turquesa, falda blanca
+ "aya": dict(skin=(238, 196, 164), hair=(30, 24, 30), hair_l=(76, 66, 80), hair_style="buns", lashes=True, iris=(40, 90, 110),
+             top="jacket", top_c=(40, 170, 180), top_d=(28, 130, 140), top_l=(90, 205, 210), inner=(250, 240, 120),
+             bottom="skirt", bottom_c=(245, 245, 250), socks=(40, 40, 50), shoe=(40, 40, 50), sole=(20, 20, 24)),
+ # montañero: pelo de punta castaño, pañuelo verde, chaqueta naranja, chándal azul
+ "sho": dict(skin=(236, 196, 160), hair=(110, 70, 40), hair_l=(160, 110, 70), hair_style="spiky", hat="bandana", hat_c=(40, 150, 90),
+             top="jacket", top_c=(250, 130, 40), top_d=(220, 100, 20), top_l=(255, 170, 90), inner=(250, 250, 250),
+             bottom="track", bottom_c=(40, 70, 150), stripe_b=(250, 250, 250), shoe=(120, 80, 50), sole=(60, 40, 24), blush=(240, 140, 120)),
+ # chica del gimnasio: pelo corto blanco, cinta roja, camiseta de tirantes gris, chándal negro
+ "kana": dict(skin=(214, 168, 130), hair=(240, 240, 245), hair_l=(255, 255, 255), hair_style="short", lashes=True, iris=(150, 60, 50), hat="headband", hat_c=(220, 40, 50),
+              top="tank", top_c=(130, 134, 146), top_d=(104, 108, 120), top_l=(160, 164, 176), inner=(130, 134, 146),
+              bottom="track", bottom_c=(26, 26, 32), stripe_b=(220, 40, 50), shoe=(250, 250, 250), sole=(220, 40, 50), blush=(230, 130, 110)),
+ # estudiante del aula: pelo corto azul marino, gafas, uniforme con lazo, pantalón gris
+ "yuto": dict(skin=(246, 212, 182), hair=(30, 40, 90), hair_l=(70, 84, 140), hair_style="short", glasses=(40, 40, 50),
+              top="uniform", top_c=(60, 64, 76), top_d=(44, 48, 58), top_l=(90, 94, 108), inner=(250, 250, 255),
+              bottom="jeans", bottom_c=(110, 112, 124), shoe=(50, 36, 30), sole=(24, 18, 14)),
 }

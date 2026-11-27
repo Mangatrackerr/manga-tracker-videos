@@ -136,3 +136,13 @@ Igual que "todo animado" pero en cada vídeo cambian personaje, escenario y anim
 - `lote_2026-11-21y.py`: props nuevos (ropa que sale volando, mancha de pintura que cambia de color, ratón robot, balón chutado al horizonte, portería que se aleja,
   burbujas de chat, pergamino-lista, remolino de pétalos, lupa, manzanas que caen, cuaderno negro, remate de voleibol con ondas, marcador).
 
+
+## Lote 2026-11-27z (27/11/2026)
+- `pipeline/satira/escenarios4.py`: 8 escenarios nuevos con variante (aldea/aldea_noche, tribunal/tribunal_noche, planeta/planeta_rojo, desvan/desvan_noche,
+  kiosco/kiosco_noche, nevada/nevada_alba, gimnasio/gimnasio_noche, aula/aula_tarde). `EC4.instalar4()` (registra también los de escenarios3); hoja: `python3 pipeline/satira/escenarios4.py hoja.jpg`.
+- `looks.py`: 8 personajes nuevos (goro, rina, kenta, chiho, aya, sho, kana, yuto).
+- `lote_2026-11-27z.py`: props nuevos (tira de película con relleno tachado, tijeras, mazo de juez con ondas, medidor de HYPE, cuenta atrás 5:00 que no avanza, aura,
+  grietas de lava, cajas "PENDIENTE" que se apilan, folletos volando, burbujas de spoiler, copa, saco de boxeo disparado, bocetos simple/trabajado, examen con nota, estrellas de valoración).
+- Clips extra de `procesadas/grabacion_2026-11-02.mp4`: perfil fijo 129.5 → Planificado 0.80/0.577; ficha fija 97.3 → valoración ★ 0.47/0.316; estrenos 1.2–5.5 (título 0.42/0.082).
+- Montaje: el modelo Supertonic tiene que quedar con sus archivos directamente en `pipeline/supertonic/` (no en la subcarpeta del tar).
+
